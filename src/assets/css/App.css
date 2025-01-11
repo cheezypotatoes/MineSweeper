@@ -1,0 +1,26 @@
+html, body {
+    height: 100vh;
+    margin: 0;
+  }
+
+#MainContainer {
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 80vw 20vw;
+    grid-template-rows: 1fr;
+}
+
+#GameContainer {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#EventContainer {
+    height: 100%;
+    width: 100%;
+    background-color: rebeccapurple;
+}

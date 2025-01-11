@@ -1,0 +1,9 @@
+#GameBoard {
+    height: 75vh;
+    width: 40vw;
+    outline: 0.5vw solid red;
+    display: grid;
+   
+    
+}
+
