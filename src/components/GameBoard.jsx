@@ -3,22 +3,24 @@ import "../assets/css/GameBoard.css"
 import { useEffect, useState, useRef } from "react";
 import Tile from "./Tile";
 import { eventBus } from "../GameScripts/EventBus"
+import { MineSweeper } from "../GameScripts/Game";
 
 function GameBoard() {
-    const GameBoard = useRef(null)
-    const [tiles, setTiles] = useState([])
-    const [tilesSize] = useState([3, 3])
+    const GameBoard = useRef(null);
+    const [tiles, setTiles] = useState([]);
+    const [tilesSize] = useState([3, 3]);
 
+    // TODO: Make tests
+    // TODO: Grid must change and consume events
     
     // Renders twice due to development mode
     useEffect(() => {
         GameBoard.current.style.gridTemplateColumns = `repeat(${tilesSize[0]}, 1fr)`;
         GameBoard.current.style.gridTemplateRows = `repeat(${tilesSize[1]}, 1fr)`;
-        let bombSet = eventBus.emit("GenerateBombs", {max: tilesSize[1] * tilesSize[0], amount: 5});
-        console.log(bombSet)
-        
-        
-        
+
+        MineSweeper.setHeightWidth({ height: tilesSize[0], width: tilesSize[1] })
+        MineSweeper.GenerateBomb()
+             
         const tilesAmount = tilesSize[1] * tilesSize[0];
         const tiles = [];
 
