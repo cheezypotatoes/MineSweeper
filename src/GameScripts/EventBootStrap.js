@@ -5,7 +5,7 @@ const TilePressed = ({ index }) => {
     console.log(`Tile index: ${index} was pressed`);
 };
 
-const GenerateBombs = ({max, amount}) => {
+const GenerateBombs = ({ max, amount }) => {
     let bombIndexSet = new Set();
     let i = 0;
     while (i < amount) {
