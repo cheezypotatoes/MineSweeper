@@ -1,7 +1,7 @@
 const BootStrapList = new Map();
 
 
-const TilePressed = (index) => {
+const TilePressed = ({ index }) => {
     console.log(`Tile index: ${index} was pressed`);
 };
 

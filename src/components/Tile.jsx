@@ -9,7 +9,7 @@ function Tile( { index } ) {
     const Index = useRef(index)
 
     return (
-        <div className="Tile" onClick={() => {eventBus.emit("TilePressed", Index.current)}}>
+        <div className="Tile" onClick={() => {eventBus.emit("TilePressed", {index: Index.current})}}>
 
         </div>
     )
