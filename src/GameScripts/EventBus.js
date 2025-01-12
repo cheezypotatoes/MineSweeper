@@ -19,9 +19,12 @@ class EventBus {
     }
 
     emit(event, data) {
+        let returnData = [];
+
         if (this.events[event]) {
-          this.events[event].forEach(callback => callback(data));
+            returnData = this.events[event].map(callback => callback(data));
         }
+        return returnData.length === 1 ? returnData[0] : returnData
     }
 
     unsubscribe(event, callback) {
