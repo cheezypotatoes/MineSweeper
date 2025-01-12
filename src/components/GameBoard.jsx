@@ -12,6 +12,9 @@ function GameBoard() {
 
     // TODO: Make tests
     // TODO: Grid must change and consume events
+    // TODO: Make tiles generate events
+    // TODO: Make check for new events when tile is pressed (Suggestion, make a parent function that tiles can call)
+    // TODO: Make bomb checker
     
     // Renders twice due to development mode
     useEffect(() => {
