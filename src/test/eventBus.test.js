@@ -9,6 +9,11 @@ describe('BombGenerator', () => {
     expect(result.size).toBe(10);
   });
 
+  test('returns empty set if max < amount', () => {
+    const result = eventBus.emit('GenerateBombs', { max: 10, amount: 50 });
+    expect(result.size).toBe(0);
+  });
+
 })
   
  

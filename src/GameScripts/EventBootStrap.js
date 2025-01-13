@@ -6,6 +6,8 @@ const TilePressed = ({ index }) => {
 };
 
 const GenerateBombs = ({ max, amount }) => {
+    if (max < amount) {return new Set();}
+
     let bombIndexSet = new Set();
     let i = 0;
     while (i < amount) {

@@ -5,3 +5,12 @@
     border: 1px gray solid;
    
 }
+
+.TestTileText {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 1vw;
+    height: 100%;  
+}
