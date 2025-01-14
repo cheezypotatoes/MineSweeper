@@ -5,13 +5,8 @@ class Event_Store {
         self.store = []
     }
 
-    add(index, isBomb) {
-        const event = {
-            index: index,
-            isBomb: isBomb,
-        };
-
-        self.store.push(event);
+    add({ Event }) {
+        self.store.push(Event);
     }
 
     getEvents() {

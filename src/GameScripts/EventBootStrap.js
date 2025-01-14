@@ -1,13 +1,14 @@
 import { MineSweeper } from "./Game";
+import { EventStore } from "./EventStore";
 
 const BootStrapList = new Map();
 
 const TilePressed = ({ index }) => {
-    MineSweeper.TilePressed({ index: index })
+    MineSweeper.TilePressed({ index: index });
 };
 
-const SendTileUncoveredEventToEventStore = ({ event }) => {
-    console.log(event)
+const SendTileUncoveredEventToEventStore = ({ Event }) => {
+    EventStore.add({Event: Event});
 };
 
 const GenerateBombs = ({ max, amount }) => {

@@ -27,7 +27,7 @@ class MineSweeperGame {
             adjacentNumber: 0, // UNFINISHED
         }
 
-        eventBus.emit("SendTileUncoveredEventToEventStore", { event: Event })
+        eventBus.emit("SendTileUncoveredEventToEventStore", { Event: Event })
     }
 
     returnBombIndex() {
