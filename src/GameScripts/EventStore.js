@@ -18,6 +18,10 @@ class Event_Store {
         return null;
     }
 
+    clearEvents() {
+        this.store = [];
+    }
+
     getEvents() {
         return this.store;
     }
