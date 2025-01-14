@@ -17,6 +17,19 @@ class MineSweeperGame {
         this.bombIndexes = generatedBombIndexSet;
     }
 
+    TilePressed({ index }) {
+        let Event = {
+            type: "UncoveredTile",
+            index: index,
+            timeStamp: new Date().toISOString().replace('T', ' ').slice(0, 19),
+            isBomb: this.bombIndexes.has(index) ? true: false, // UNFINISHED
+            isFlagged: false, // UNFINISHED
+            adjacentNumber: 0, // UNFINISHED
+        }
+
+        eventBus.emit("SendTileUncoveredEventToEventStore", { event: Event })
+    }
+
     returnBombIndex() {
         return this.bombIndexes;
     }

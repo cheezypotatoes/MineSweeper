@@ -6,12 +6,12 @@ import { useRef } from "react"
 import { eventBus } from "../GameScripts/EventBus"
 
 
-function Tile( { index, isFlag, isDug } ) {
+function Tile( { index, isFlag, uncovered } ) {
     const Index = useRef(index)
 
     return (
         <div className="Tile" onClick={() => {eventBus.emit("TilePressed", {index: Index.current})}}>
-            {isDug ? <h1 className="TestTileText" >⛏️</h1> : <h1 className="TestTileText" >🟤</h1>}
+            {uncovered ? <h1 className="TestTileText" >⛏️</h1> : <h1 className="TestTileText" >🟤</h1>}
         </div>
     )
 }

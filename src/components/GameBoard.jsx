@@ -10,6 +10,7 @@ function GameBoard() {
     const [tiles, setTiles] = useState([]);
     const [tilesSize, setTileSize] = useState([3, 3]);
     const [dugTileSet, setDugTileSet] = useState(new Set())
+    // Test events
     const [dugTilesEvent, setDugTilesEvent] = useState(
         [
             { index: 5 },
@@ -20,7 +21,7 @@ function GameBoard() {
 
     // TODO: Make tiles adjust properly depending on the size to avoid overflow
     // TODO: Make tiles generate events by finishing the event store
-    // TODO: Make check for new events when tile is pressed (Suggestion, make a parent function that tiles can call)
+    // TODO: Make check for new events when tile is pressed (Suggestion, make a parent function that tiles can call to grab on the event store)
     // TODO: Make bomb checker
 
     // Change dug tiles event if the event changes
@@ -43,15 +44,19 @@ function GameBoard() {
 
         for (let i = 0; i < tilesAmount; i++) {
             let isDug = dugTileSet.has(i)? true : false
-            tiles.push(<Tile key={i} index={i} isFlag={false} isDug={isDug}/>);
+            tiles.push(<Tile key={i} index={i} isFlag={false} uncovered={isDug}/>);
         }
 
         setTiles(tiles)
     }, [dugTileSet, tilesSize]);
 
+    useEffect(() => {
+        MineSweeper.GenerateBomb()
+    }, [])
+
     
     return (
-        <div id="GameBoard" ref={GameBoard} onClick={() => {setTileSize([13, 13])}}>
+        <div id="GameBoard" ref={GameBoard}>
             {tiles}
         </div>
     )
