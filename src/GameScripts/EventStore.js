@@ -2,11 +2,20 @@
 
 class Event_Store {
     constructor() {
-        self.store = []
+        this.store = []
     }
 
     add({ Event }) {
-        self.store.push(Event);
+        this.store.push(Event);
+    }
+
+    getSpecificEvent({ EventId }) {
+        for (let i = 0; i < this.store.length; i++) {
+            if (this.store[i].id === EventId) {
+                return this.store[i];
+            }
+        }
+        return null;
     }
 
     getEvents() {
@@ -14,6 +23,6 @@ class Event_Store {
     }
 }
 
-const EventStore = Event_Store()
+const EventStore = new Event_Store()
 
 export { EventStore };

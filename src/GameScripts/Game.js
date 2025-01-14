@@ -18,7 +18,9 @@ class MineSweeperGame {
     }
 
     TilePressed({ index }) {
+        const id = `id_${Date.now()}_${Math.random().toString(36).substring(2, 10)}`
         let Event = {
+            id: id,
             type: "UncoveredTile",
             index: index,
             timeStamp: new Date().toISOString().replace('T', ' ').slice(0, 19),
@@ -28,6 +30,8 @@ class MineSweeperGame {
         }
 
         eventBus.emit("SendTileUncoveredEventToEventStore", { Event: Event })
+
+        return id // For unittest
     }
 
     returnBombIndex() {
