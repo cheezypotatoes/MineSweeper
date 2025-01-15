@@ -14,9 +14,10 @@ function Tile( { index, isFlag, uncovered, UpdateEvent } ) {
         UpdateEvent() // Grabs event from TileUncovered projection
     }
 
+    // TODO: BOMB AND FLAG IS GOING TO BE ON THE H1
     return (
-        <div className="Tile" onClick={TilePressed}>
-            {uncovered ? <h1 className="TestTileText" >⛏️</h1> : <h1 className="TestTileText" >🟤</h1>}
+        <div className={`Tile ${uncovered ? 'revealed' : 'uncovered'}`}  onClick={TilePressed}>
+            <h1 className="TestTileText" ></h1> 
         </div>
     )
 }

@@ -1,9 +1,7 @@
 #GameBoard {
     height: 75vh;
     width: 40vw;
-    outline: 0.5vw solid red;
+    outline: 0.5vw solid rgb(102, 102, 102);
     display: grid;
-   
-    
 }
 
