@@ -19,11 +19,9 @@ export class TileUncovered_Projection {
 
     clearEvents() {
         this.events = [];
-        console.log("Events cleared.");
     }
 
     returnEvents() {
-        // TEMP
-        console.log(this.events);
+        return this.events;
     }
 }

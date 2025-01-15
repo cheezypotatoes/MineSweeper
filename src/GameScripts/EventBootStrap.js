@@ -16,6 +16,10 @@ const ApplyEventToProjectionManager = ({ Events }) => {
     ProjectionManager.applyEvents({ Events: Events });
 }
 
+const ReturnSpecificProjectionEvents = ({ ProjectionType }) => {
+    return ProjectionManager.returnSpecificProjectionEvent({ ProjectionType:ProjectionType });
+};
+
 const GenerateBombs = ({ max, amount }) => {
     if (max < amount) {return new Set();}
 
@@ -34,6 +38,7 @@ const GenerateBombs = ({ max, amount }) => {
 BootStrapList.set("TilePressed", TilePressed);
 BootStrapList.set("SendTileUncoveredEventToEventStore", SendTileUncoveredEventToEventStore);
 BootStrapList.set("ApplyEventToProjectionManager", ApplyEventToProjectionManager);
+BootStrapList.set("ReturnSpecificProjectionEvents", ReturnSpecificProjectionEvents);
 BootStrapList.set("GenerateBombs", GenerateBombs);
 
 

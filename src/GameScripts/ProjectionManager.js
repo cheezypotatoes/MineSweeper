@@ -19,10 +19,13 @@ class ProjectionManagerClass {
 
     // Clear all projection to re-apply all events
     clearAllProjections() {
-        Object.entries(this.projections).forEach(([type, instance]) => {
+        Object.entries(this.projections).forEach(([, instance]) => {
             instance.clearEvents();
-            console.log("Clearing: ", type);
         });
+    }
+
+    returnSpecificProjectionEvent({ ProjectionType }) {
+        return this.projections[ProjectionType].returnEvents();
     }
 }
 
