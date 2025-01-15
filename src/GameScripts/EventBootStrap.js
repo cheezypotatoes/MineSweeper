@@ -1,5 +1,6 @@
 import { MineSweeper } from "./Game";
 import { EventStore } from "./EventStore";
+import { ProjectionManager } from "./ProjectionManager";
 
 const BootStrapList = new Map();
 
@@ -10,6 +11,10 @@ const TilePressed = ({ index }) => {
 const SendTileUncoveredEventToEventStore = ({ Event }) => {
     EventStore.add({Event: Event});
 };
+
+const ApplyEventToProjectionManager = ({ Events }) => {
+    ProjectionManager.applyEvents({ Events: Events });
+}
 
 const GenerateBombs = ({ max, amount }) => {
     if (max < amount) {return new Set();}
@@ -27,7 +32,8 @@ const GenerateBombs = ({ max, amount }) => {
 }
 
 BootStrapList.set("TilePressed", TilePressed);
-BootStrapList.set("SendTileUncoveredEventToEventStore", SendTileUncoveredEventToEventStore)
+BootStrapList.set("SendTileUncoveredEventToEventStore", SendTileUncoveredEventToEventStore);
+BootStrapList.set("ApplyEventToProjectionManager", ApplyEventToProjectionManager);
 BootStrapList.set("GenerateBombs", GenerateBombs);
 
 

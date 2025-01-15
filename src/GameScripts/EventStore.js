@@ -1,4 +1,4 @@
-
+import { eventBus } from "./EventBus";
 
 class Event_Store {
     constructor() {
@@ -7,6 +7,7 @@ class Event_Store {
 
     add({ Event }) {
         this.store.push(Event);
+        eventBus.emit("ApplyEventToProjectionManager", { Events: this.store })
     }
 
     getSpecificEvent({ EventId }) {

@@ -15,12 +15,12 @@ function GameBoard() {
         [
             { index: 5 },
             { index: 1 },
-            { index: 7 },
+            { index: 4 },
         ]
     );
 
     // TODO: Make tiles adjust properly depending on the size to avoid overflow
-    // TODO: Make tiles generate events by finishing the event store
+    // TODO: Make projection manager and projection CONFIRM IT
     // TODO: Make check for new events when tile is pressed (Suggestion, make a parent function that tiles can call to grab on the event store)
     // TODO: Make bomb checker
 
