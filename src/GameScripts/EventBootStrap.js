@@ -39,12 +39,17 @@ const GenerateBombs = ({ max, amount }) => {
     return bombIndexSet;
 }
 
+const CheckIfIndexIsBomb = ({ index }) => {
+    return MineSweeper.isTileUncoveredBomb({ index:index })
+}
+
 BootStrapList.set("TilePressed", TilePressed);
 BootStrapList.set("SendTileUncoveredEventToEventStore", SendTileUncoveredEventToEventStore);
 BootStrapList.set("ApplyEventToProjectionManager", ApplyEventToProjectionManager);
 BootStrapList.set("ReturnSpecificProjectionEvents", ReturnSpecificProjectionEvents);
 BootStrapList.set("ReturnNewSpecificProjectionEvent", ReturnNewSpecificProjectionEvent);
 BootStrapList.set("GenerateBombs", GenerateBombs);
+BootStrapList.set("CheckIfIndexIsBomb", CheckIfIndexIsBomb);
 
 
 export default BootStrapList;

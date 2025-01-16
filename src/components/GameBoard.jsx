@@ -8,7 +8,7 @@ import { MineSweeper } from "../GameScripts/Game";
 function GameBoard() {
     const GameBoard = useRef(null);
     const [tiles, setTiles] = useState([]);
-    const [tilesSize, setTileSize] = useState([3, 3]);
+    const [tilesSize, setTileSize] = useState([9, 9]);
     const [dugTileSet, setDugTileSet] = useState(new Set())
     const [dugTilesEvent, setDugTilesEvent] = useState([]);
 

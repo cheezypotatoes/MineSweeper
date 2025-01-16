@@ -13,8 +13,9 @@ class MineSweeperGame {
     }
 
     GenerateBomb() {
-        const generatedBombIndexSet = eventBus.emit("GenerateBombs", {max: this.height * this.width, amount: 5});
+        const generatedBombIndexSet = eventBus.emit("GenerateBombs", {max: this.height * this.width, amount: 3});
         this.bombIndexes = generatedBombIndexSet;
+        console.log(this.bombIndexes)
     }
 
     TilePressed({ index }) {
@@ -32,6 +33,10 @@ class MineSweeperGame {
         eventBus.emit("SendTileUncoveredEventToEventStore", { Event: Event })
 
         return id // For unittest
+    }
+
+    isTileUncoveredBomb({ index }) {
+        return this.bombIndexes.has(index);
     }
 
     returnBombIndex() {
