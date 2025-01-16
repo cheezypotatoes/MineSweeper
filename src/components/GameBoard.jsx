@@ -13,9 +13,11 @@ function GameBoard() {
     const [dugTilesEvent, setDugTilesEvent] = useState([]);
 
     // TODO: Make tiles adjust properly depending on the size to avoid overflow
-    // TODO: Make projection manager and projection CONFIRM IT
-    // TODO: Make check for new events when tile is pressed (Suggestion, make a parent function that tiles can call to grab on the event store)
-    // TODO: Make bomb checker
+    // TODO: Number of bombs around
+    // TODO: Huge uncovering when first pressed (How does it work?)
+    // TODO: Right clicking adds a flag that avoids uncovering.
+    // TODO: Huge bomb?
+
 
     // Update event by grabbing the latest event from projection
     const UpdateEvent = () => {
