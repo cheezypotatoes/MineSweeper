@@ -45,6 +45,7 @@ function GameBoard() {
 
         for (let i = 0; i < tilesAmount; i++) {
             let isDug = dugTileSet.has(i)? true : false
+            //TODO: Make it return a function call that check if the index on this specific tile is flagged
             tiles.push(<Tile key={i} index={i} isFlag={false} uncovered={isDug} UpdateEvent={UpdateEvent}/>);
         }
 
