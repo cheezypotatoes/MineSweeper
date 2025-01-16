@@ -9,16 +9,20 @@ const TilePressed = ({ index }) => {
 };
 
 const SendTileUncoveredEventToEventStore = ({ Event }) => {
-    EventStore.add({Event: Event});
+    EventStore.addLatestEventToProjectionManager({Event: Event});
 };
 
-const ApplyEventToProjectionManager = ({ Events }) => {
-    ProjectionManager.applyEvents({ Events: Events });
+const ApplyEventToProjectionManager = ({ Event }) => {
+    ProjectionManager.applyEvents({ Event: Event });
 }
 
 const ReturnSpecificProjectionEvents = ({ ProjectionType }) => {
     return ProjectionManager.returnSpecificProjectionEvent({ ProjectionType:ProjectionType });
 };
+
+const ReturnNewSpecificProjectionEvent = ({ ProjectionType }) => {
+    return ProjectionManager.returnNewSpecificProjectionEvent({ ProjectionType:ProjectionType });
+}
 
 const GenerateBombs = ({ max, amount }) => {
     if (max < amount) {return new Set();}
@@ -39,6 +43,7 @@ BootStrapList.set("TilePressed", TilePressed);
 BootStrapList.set("SendTileUncoveredEventToEventStore", SendTileUncoveredEventToEventStore);
 BootStrapList.set("ApplyEventToProjectionManager", ApplyEventToProjectionManager);
 BootStrapList.set("ReturnSpecificProjectionEvents", ReturnSpecificProjectionEvents);
+BootStrapList.set("ReturnNewSpecificProjectionEvent", ReturnNewSpecificProjectionEvent);
 BootStrapList.set("GenerateBombs", GenerateBombs);
 
 

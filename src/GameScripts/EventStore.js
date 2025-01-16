@@ -5,9 +5,9 @@ class Event_Store {
         this.store = []
     }
 
-    add({ Event }) {
+    addLatestEventToProjectionManager({ Event }) {
         this.store.push(Event);
-        eventBus.emit("ApplyEventToProjectionManager", { Events: this.store })
+        eventBus.emit("ApplyEventToProjectionManager", { Event: this.getLatestEvent() })
     }
 
     getSpecificEvent({ EventId }) {
@@ -19,12 +19,12 @@ class Event_Store {
         return null;
     }
 
-    clearEvents() {
-        this.store = [];
-    }
-
     getEvents() {
         return this.store;
+    }
+
+    getLatestEvent() {
+        return this.store[this.store.length - 1]
     }
 }
 

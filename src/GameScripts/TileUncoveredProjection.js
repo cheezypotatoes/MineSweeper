@@ -17,11 +17,11 @@ export class TileUncovered_Projection {
         this.returnEvents(); // Just for testing ignore this
     }
 
-    clearEvents() {
-        this.events = [];
-    }
-
     returnEvents() {
         return this.events;
+    }
+
+    returnLatestEvent() {
+        return this.events[this.events.length - 1];
     }
 }

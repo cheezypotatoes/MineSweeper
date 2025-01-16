@@ -8,13 +8,9 @@ class ProjectionManagerClass {
     }
 
     // Give the latest events to the projections.
-    applyEvents({ Events }) {
-        this.clearAllProjections();
-        for (let i = 0; i < Events.length; i++) {
-            let currentEvent = Events[i];
-            let projectionMatched = this.projections[currentEvent.type];
-            projectionMatched.addEvent({ Event: currentEvent })
-        }
+    applyEvents({ Event }) {
+        let projectionMatched = this.projections[Event.type];
+        projectionMatched.addEvent({ Event: Event })
     } 
 
     // Clear all projection to re-apply all events
@@ -26,6 +22,10 @@ class ProjectionManagerClass {
 
     returnSpecificProjectionEvent({ ProjectionType }) {
         return this.projections[ProjectionType].returnEvents();
+    }
+
+    returnNewSpecificProjectionEvent( { ProjectionType } ) {
+        return this.projections[ProjectionType].returnLatestEvent();
     }
 }
 

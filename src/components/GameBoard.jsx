@@ -10,7 +10,6 @@ function GameBoard() {
     const [tiles, setTiles] = useState([]);
     const [tilesSize, setTileSize] = useState([3, 3]);
     const [dugTileSet, setDugTileSet] = useState(new Set())
-    // Test events
     const [dugTilesEvent, setDugTilesEvent] = useState([]);
 
     // TODO: Make tiles adjust properly depending on the size to avoid overflow
@@ -18,15 +17,18 @@ function GameBoard() {
     // TODO: Make check for new events when tile is pressed (Suggestion, make a parent function that tiles can call to grab on the event store)
     // TODO: Make bomb checker
 
+    // Update event by grabbing the latest event from projection
     const UpdateEvent = () => {
-        const newEvents = eventBus.emit("ReturnSpecificProjectionEvents", { ProjectionType: "UncoveredTile" });
-        setDugTilesEvent(newEvents);
+        const newEvent = eventBus.emit("ReturnNewSpecificProjectionEvent", { ProjectionType: "UncoveredTile" });
+        setDugTilesEvent(prevEvents => [...prevEvents, newEvent]);
     }
 
     // Change dug tiles event if the event changes
     useEffect(() => {
-        const newSet = new Set(dugTilesEvent.map(event => event.index));
-        setDugTileSet(newSet);
+        let latestEvent = dugTilesEvent[dugTilesEvent.length - 1];
+        if (latestEvent === undefined) {return;}
+        let latestEventIndex = latestEvent.index;
+        setDugTileSet(prevSet => new Set(prevSet).add(latestEventIndex));
     }, [dugTilesEvent]);
     
     // Set board size
