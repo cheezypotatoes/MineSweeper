@@ -15,7 +15,6 @@ class MineSweeperGame {
     GenerateBomb() {
         const generatedBombIndexSet = eventBus.emit("GenerateBombs", {max: this.height * this.width, amount: 3});
         this.bombIndexes = generatedBombIndexSet;
-        console.log(this.bombIndexes)
     }
 
     TilePressed({ index }) {
