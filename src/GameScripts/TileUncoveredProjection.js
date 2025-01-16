@@ -24,4 +24,8 @@ export class TileUncovered_Projection {
     returnLatestEvent() {
         return this.events[this.events.length - 1];
     }
+
+    returnLatestEventIndexOnly() {
+        return this.events[this.events.length - 1].index;
+    }
 }

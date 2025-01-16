@@ -24,6 +24,10 @@ const ReturnNewSpecificProjectionEvent = ({ ProjectionType }) => {
     return ProjectionManager.returnNewSpecificProjectionEvent({ ProjectionType:ProjectionType });
 }
 
+const ReturnNewSpecificProjectionEventIndexOnly = ({ ProjectionType }) => {
+    return ProjectionManager.returnNewSpecificProjectionEventIndexOnly({ ProjectionType:ProjectionType });
+}
+
 const GenerateBombs = ({ max, amount }) => {
     if (max < amount) {return new Set();}
 
@@ -48,6 +52,7 @@ BootStrapList.set("SendTileUncoveredEventToEventStore", SendTileUncoveredEventTo
 BootStrapList.set("ApplyEventToProjectionManager", ApplyEventToProjectionManager);
 BootStrapList.set("ReturnSpecificProjectionEvents", ReturnSpecificProjectionEvents);
 BootStrapList.set("ReturnNewSpecificProjectionEvent", ReturnNewSpecificProjectionEvent);
+BootStrapList.set("ReturnNewSpecificProjectionEventIndexOnly", ReturnNewSpecificProjectionEventIndexOnly);
 BootStrapList.set("GenerateBombs", GenerateBombs);
 BootStrapList.set("CheckIfIndexIsBomb", CheckIfIndexIsBomb);
 

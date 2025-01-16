@@ -24,9 +24,14 @@ class ProjectionManagerClass {
         return this.projections[ProjectionType].returnEvents();
     }
 
-    returnNewSpecificProjectionEvent( { ProjectionType } ) {
+    returnNewSpecificProjectionEvent({ ProjectionType }) {
         return this.projections[ProjectionType].returnLatestEvent();
     }
+
+    returnNewSpecificProjectionEventIndexOnly ({ ProjectionType }) {
+        return this.projections[ProjectionType].returnLatestEventIndexOnly();
+    }
+    
 }
 
 export const ProjectionManager = new ProjectionManagerClass();

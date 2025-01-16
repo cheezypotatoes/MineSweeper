@@ -19,7 +19,7 @@ function GameBoard() {
 
     // Update event by grabbing the latest event from projection
     const UpdateEvent = () => {
-        const newEvent = eventBus.emit("ReturnNewSpecificProjectionEvent", { ProjectionType: "UncoveredTile" });
+        const newEvent = eventBus.emit("ReturnNewSpecificProjectionEventIndexOnly", { ProjectionType: "UncoveredTile" });
         setDugTilesEvent(prevEvents => [...prevEvents, newEvent]);
     }
 
@@ -27,7 +27,7 @@ function GameBoard() {
     useEffect(() => {
         let latestEvent = dugTilesEvent[dugTilesEvent.length - 1];
         if (latestEvent === undefined) {return;}
-        let latestEventIndex = latestEvent.index;
+        let latestEventIndex = latestEvent;
         setDugTileSet(prevSet => new Set(prevSet).add(latestEventIndex));
     }, [dugTilesEvent]);
     
