@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { eventBus } from "./EventBus";
 
 class MineSweeperGame {
