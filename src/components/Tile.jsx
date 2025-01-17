@@ -13,7 +13,9 @@ function Tile( { index, isFlag, uncovered, UpdateEvent } ) {
     const TilePressed = () => {
         eventBus.emit("TilePressed", {index: Index.current})
         UpdateEvent() // Grabs event from TileUncovered projection
-        TileStatus.current.textContent = eventBus.emit("CheckIfIndexIsBomb", {index: index}) ? "💣" : '';
+        let isBomb = eventBus.emit("CheckIfIndexIsBomb", {index: index});
+        // If it's not a bomb then get its number
+        TileStatus.current.textContent = isBomb ? "💣" : eventBus.emit("GetAdjacentNumber", {index: index});
     }
 
     return (

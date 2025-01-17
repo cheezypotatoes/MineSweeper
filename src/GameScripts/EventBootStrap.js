@@ -22,11 +22,11 @@ const ReturnSpecificProjectionEvents = ({ ProjectionType }) => {
 
 const ReturnNewSpecificProjectionEvent = ({ ProjectionType }) => {
     return ProjectionManager.returnNewSpecificProjectionEvent({ ProjectionType:ProjectionType });
-}
+};
 
 const ReturnNewSpecificProjectionEventIndexOnly = ({ ProjectionType }) => {
     return ProjectionManager.returnNewSpecificProjectionEventIndexOnly({ ProjectionType:ProjectionType });
-}
+};
 
 const GenerateBombs = ({ max, amount }) => {
     if (max < amount) {return new Set();}
@@ -45,6 +45,10 @@ const GenerateBombs = ({ max, amount }) => {
 
 const CheckIfIndexIsBomb = ({ index }) => {
     return MineSweeper.isTileUncoveredBomb({ index:index })
+};
+
+const GetAdjacentNumber = ({ index }) => {
+    return MineSweeper.getAdjacentNumber({ index: index });
 }
 
 BootStrapList.set("TilePressed", TilePressed);
@@ -55,6 +59,7 @@ BootStrapList.set("ReturnNewSpecificProjectionEvent", ReturnNewSpecificProjectio
 BootStrapList.set("ReturnNewSpecificProjectionEventIndexOnly", ReturnNewSpecificProjectionEventIndexOnly);
 BootStrapList.set("GenerateBombs", GenerateBombs);
 BootStrapList.set("CheckIfIndexIsBomb", CheckIfIndexIsBomb);
+BootStrapList.set("GetAdjacentNumber", GetAdjacentNumber);
 
 
 export default BootStrapList;

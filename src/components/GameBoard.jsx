@@ -8,7 +8,7 @@ import { MineSweeper } from "../GameScripts/Game";
 function GameBoard() {
     const GameBoard = useRef(null);
     const [tiles, setTiles] = useState([]);
-    const [tilesSize, setTileSize] = useState([9, 9]);
+    const [tilesSize, setTileSize] = useState([10, 10]);
     const [dugTileSet, setDugTileSet] = useState(new Set())
     const [dugTilesEvent, setDugTilesEvent] = useState([]);
 
@@ -17,6 +17,8 @@ function GameBoard() {
     // TODO: Huge uncovering when first pressed (How does it work?)
     // TODO: Right clicking adds a flag that avoids uncovering.
     // TODO: Huge bomb?
+
+    // TODO: MORE TEST
 
 
     // Update event by grabbing the latest event from projection
