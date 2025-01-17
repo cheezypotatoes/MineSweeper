@@ -1,8 +1,12 @@
 .Tile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100%;
     width: 100%;
     border: 1px gray solid;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 .Tile.uncovered {
@@ -25,6 +29,6 @@
     text-align: center;
     justify-content: center;
     align-items: center;
-    font-size: 1vw;
+    font-size: 2vw;
     height: 100%;  
 }
