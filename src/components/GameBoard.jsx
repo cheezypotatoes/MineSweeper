@@ -8,7 +8,7 @@ import { MineSweeper } from "../GameScripts/Game";
 function GameBoard() {
     const GameBoard = useRef(null);
     const [tiles, setTiles] = useState([]);
-    const [tilesSize, setTileSize] = useState([10, 10]);
+    const [tilesSize, setTileSize] = useState([5, 5]);
     const [dugTileSet, setDugTileSet] = useState(new Set())
     const [dugTilesEvent, setDugTilesEvent] = useState([]);
 
@@ -19,6 +19,20 @@ function GameBoard() {
     // TODO: Huge bomb?
 
     // TODO: MORE TEST
+
+    const testing = () => {
+        const event = eventBus.emit("ReturnSpecificProjectionEvents", {ProjectionType: "UncoveredTile"})
+        
+        setDugTileSet((prevSet) => {
+            const newSet = new Set(prevSet);
+            event.forEach((tile) => {
+              if (!newSet.has(tile.index)) {
+                newSet.add(tile.index); // Add index to the set
+              }
+            });
+            return newSet;
+          });
+    }
 
 
     // Update event by grabbing the latest event from projection
@@ -64,6 +78,7 @@ function GameBoard() {
     return (
         <div id="GameBoard" ref={GameBoard}>
             {tiles}
+            <h1 onClick={() => {testing()}}>3</h1>
         </div>
     )
 }

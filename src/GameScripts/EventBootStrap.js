@@ -6,7 +6,12 @@ const BootStrapList = new Map();
 
 const TilePressed = ({ index }) => {
     MineSweeper.TilePressed({ index: index });
+
 };
+
+const Test = () => {
+    MineSweeper.checker();
+}
 
 const SendTileUncoveredEventToEventStore = ({ Event }) => {
     EventStore.addLatestEventToProjectionManager({Event: Event});
@@ -60,6 +65,7 @@ BootStrapList.set("ReturnNewSpecificProjectionEventIndexOnly", ReturnNewSpecific
 BootStrapList.set("GenerateBombs", GenerateBombs);
 BootStrapList.set("CheckIfIndexIsBomb", CheckIfIndexIsBomb);
 BootStrapList.set("GetAdjacentNumber", GetAdjacentNumber);
+BootStrapList.set("Test", Test)
 
 
 export default BootStrapList;
