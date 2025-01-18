@@ -1,5 +1,6 @@
 import { eventBus } from "./EventBus";
 // TODO: Store all uncovered tiles and if first tile was uncovered, check all corners of the uncovered tiles to uncover tiles with adjacent number more than one. Avoid uncovering bomb tiles.
+// TODO: If tile is 1 then get all its corner that is not a bomb instead
 class MineSweeperGame {
     constructor() {
         this.height = 0;
