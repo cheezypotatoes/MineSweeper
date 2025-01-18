@@ -26,6 +26,10 @@ class Event_Store {
     getLatestEvent() {
         return this.store[this.store.length - 1]
     }
+
+    clearEvents() {
+        this.store = [];
+    }
 }
 
 const EventStore = new Event_Store()

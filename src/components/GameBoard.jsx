@@ -8,13 +8,13 @@ import { MineSweeper } from "../GameScripts/Game";
 function GameBoard() {
     const GameBoard = useRef(null);
     const [tiles, setTiles] = useState([]);
-    const [tilesSize, setTileSize] = useState([9, 9]);
+    const [tilesSize, setTileSize] = useState([5, 5]);
     const [dugTileSet, setDugTileSet] = useState(new Set())
     const [dugTilesEvent, setDugTilesEvent] = useState([]);
 
     // TODO: Make tiles adjust properly depending on the size to avoid overflow
-    // TODO: Number of bombs around
-    // TODO: Huge uncovering when first pressed (How does it work?)
+    // TODO: Huge uncovering CONDITION FOR FIRST TILE UNCOVERED
+    // TODO: Find a way to check all tiles per click and if all tiles around is uncovered then don't show numbers
     // TODO: Right clicking adds a flag that avoids uncovering.
     // TODO: Huge bomb?
 
@@ -35,12 +35,7 @@ function GameBoard() {
     }
 
 
-    // Update event by grabbing the latest event from projection
-    const UpdateEvent = () => {
-        const newEvent = eventBus.emit("ReturnNewSpecificProjectionEventIndexOnly", { ProjectionType: "UncoveredTile" });
-        setDugTilesEvent(prevEvents => [...prevEvents, newEvent]);
-        testing()
-    }
+    
 
     // Change dug tiles event if the event changes
     useEffect(() => {
@@ -59,6 +54,13 @@ function GameBoard() {
 
     // If the size, setOfDugTiles Changes, then re-display the tiles on the board
     useEffect(() => {
+        // Update event by grabbing the latest event from projection
+        const UpdateEvent = () => {
+            const newEvent = eventBus.emit("ReturnNewSpecificProjectionEventIndexOnly", { ProjectionType: "UncoveredTile" });
+            setDugTilesEvent(prevEvents => [...prevEvents, newEvent]);
+            testing()
+        }
+
         const tilesAmount = tilesSize[1] * tilesSize[0];
         const tiles = [];
 
@@ -69,7 +71,7 @@ function GameBoard() {
         }
 
         setTiles(tiles)
-    }, [dugTileSet, tilesSize, UpdateEvent]);
+    }, [dugTileSet, tilesSize]);
 
     useEffect(() => {
         MineSweeper.GenerateBomb()

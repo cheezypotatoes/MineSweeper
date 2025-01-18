@@ -17,7 +17,7 @@ class MineSweeperGame {
     }
 
     GenerateBomb() {
-        const generatedBombIndexSet = eventBus.emit("GenerateBombs", {max: this.height * this.width, amount: 10});
+        const generatedBombIndexSet = eventBus.emit("GenerateBombs", {max: this.height * this.width, amount: 2});
         this.bombIndexes = generatedBombIndexSet;
     }
 
@@ -42,8 +42,6 @@ class MineSweeperGame {
             
         }
         
-        
-
         return id // For unittest
     }
     
@@ -61,8 +59,6 @@ class MineSweeperGame {
     }
 
 
-
-    // TODO: Adds make events of those checked stuff but wont update the board
     checker() {
         while (this.adjacentCheckQueue.length > 0) {
             const currentPop = this.adjacentCheckQueue.shift();
@@ -74,26 +70,18 @@ class MineSweeperGame {
             
         }
     }
-    
 
-    // TODO: MAKE TEST THEN OPTIMIZE
     getAllCorners({ index }) {
-        let leftExist = true;
-        let rightExist = true;
-        let topExist = true;
-        let bottomExist = true;
-        if (index % this.width === 0) {
-            leftExist = false;
-        } else if ((index + 1) % this.width === 0) {
-            rightExist= false;
-        }
+        // N = index
+        // Left does not exist if N is divisible by width.
+        // Right does not exist if (N + 1) is divisible by width.
+        // Top does not exist if (N - width) && (N - width + 1) && (N - width + 2) is negative, since some part can only have 1-2 top tiles.
+        // Bottom does not exist if (N + width > tile).
 
-        if ((index - this.width) < 0 && (index - (this.width + 1)) < 0 && (index - (this.width + 2)) < 0) {
-            topExist = false;
-        } else if ((index + this.width) >= this.tileAmount ) {
-            bottomExist = false;
-        }
-
+        let leftExist = index % this.width === 0? false : true
+        let rightExist = (index + 1) % this.width === 0? false : true
+        let topExist = (index - this.width) < 0 && (index - (this.width + 1)) < 0 && (index - (this.width + 2)) < 0? false : true
+        let bottomExist = (index + this.width) >= this.tileAmount? false : true
         
         let topLeft = leftExist ? topExist ? Math.floor((index - this.width)) - 1: "" : ""; 
         let topCenter = topExist ? Math.floor((index - this.width)) : "";
@@ -104,9 +92,8 @@ class MineSweeperGame {
         let bottomCenter = bottomExist ?  Math.floor((index + this.width)) : "";
         let bottomRight = rightExist ? bottomExist ? Math.floor((index + this.width)) + 1: "": "";
         
-        const array = [topLeft, topCenter, topRight, left, right, bottomLeft, bottomCenter, bottomRight];
-        const filteredArray = array.filter(item => item !== "");
-        return filteredArray;
+        // Get rid of "" using filter.
+        return [topLeft, topCenter, topRight, left, right, bottomLeft, bottomCenter, bottomRight].filter(item => item !== "");;
     }
 
     CheckIfCornerIsNotOnTheCheckTilesSet({ corners }) {
