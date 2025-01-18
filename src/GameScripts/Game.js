@@ -17,12 +17,11 @@ class MineSweeperGame {
     }
 
     GenerateBomb() {
-        const generatedBombIndexSet = eventBus.emit("GenerateBombs", {max: this.height * this.width, amount: 2});
+        const generatedBombIndexSet = eventBus.emit("GenerateBombs", {max: this.height * this.width, amount: 10});
         this.bombIndexes = generatedBombIndexSet;
     }
 
     TilePressed({ index }) {
-        console.log("DEALING,")
         const id = `id_${Date.now()}_${Math.random().toString(36).substring(2, 10)}`
         let Event = {
             id: id,
@@ -63,15 +62,16 @@ class MineSweeperGame {
 
 
 
-
+    // TODO: Adds make events of those checked stuff but wont update the board
     checker() {
         while (this.adjacentCheckQueue.length > 0) {
             const currentPop = this.adjacentCheckQueue.shift();
             if (this.getAdjacentNumber({ index: currentPop }) === 0) {
                 console.log(currentPop)
-                // TODO: DOES NOT GET RID OF TILES MAKE A DIFFERENT ONE OR CALL IT ON TILE COMPONENT
                 this.TilePressed({index: currentPop})
-            }
+            } 
+
+            
         }
     }
     
