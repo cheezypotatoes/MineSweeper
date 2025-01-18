@@ -2,12 +2,11 @@ import "../assets/css/GameBoard.css"
 import { useEffect, useState, useRef } from "react";
 import Tile from "./Tile";
 import { eventBus } from "../GameScripts/EventBus"
-import { MineSweeper } from "../GameScripts/Game";
 
 function GameBoard() {
     const GameBoard = useRef(null);
     const [tiles, setTiles] = useState([]);
-    const [tilesSize,] = useState([5, 5]);
+    const [tilesSize,] = useState([9, 9]); // TODO: Causes crash if change directly, make a safe way to change by removing elements in state such as dugTileSet.
     const [dugTileSet, setDugTileSet] = useState(new Set())
     const [dugTilesEvent, setDugTilesEvent] = useState([]);
 
@@ -19,6 +18,7 @@ function GameBoard() {
 
     // TODO: MORE TEST
 
+    // TODO: OPTIMIZE AND REFRACTOR
     const testing = () => {
         const event = eventBus.emit("ReturnSpecificProjectionEvents", {ProjectionType: "UncoveredTile"})
         
@@ -48,7 +48,7 @@ function GameBoard() {
     useEffect(() => {
         GameBoard.current.style.gridTemplateColumns = `repeat(${tilesSize[0]}, 1fr)`;
         GameBoard.current.style.gridTemplateRows = `repeat(${tilesSize[1]}, 1fr)`;
-        MineSweeper.setHeightWidth({ height: tilesSize[0], width: tilesSize[1] }) 
+        eventBus.emit("SetBoardSize", {height: tilesSize[0], width: tilesSize[1]});
     }, [tilesSize])
 
     // If the size, setOfDugTiles Changes, then re-display the tiles on the board

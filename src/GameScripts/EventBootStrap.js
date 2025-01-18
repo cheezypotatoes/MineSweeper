@@ -6,12 +6,15 @@ const BootStrapList = new Map();
 
 const TilePressed = ({ index }) => {
     MineSweeper.TilePressed({ index: index });
+};
 
+const SetBoardSize = ({ height, width }) => {
+    MineSweeper.setHeightWidth({ height: height, width: width }) 
 };
 
 const CreateEventForTilesWithZeroAdjacentCheckQueue = () => {
     MineSweeper.createEventForTilesWithZeroAdjacentCheckQueue();
-}
+};
 
 const SendTileUncoveredEventToEventStore = ({ Event }) => {
     EventStore.addLatestEventToProjectionManager({Event: Event});
@@ -46,6 +49,7 @@ const GetAdjacentNumber = ({ index }) => {
 }
 
 BootStrapList.set("TilePressed", TilePressed);
+BootStrapList.set("SetBoardSize", SetBoardSize);
 BootStrapList.set("SendTileUncoveredEventToEventStore", SendTileUncoveredEventToEventStore);
 BootStrapList.set("ApplyEventToProjectionManager", ApplyEventToProjectionManager);
 BootStrapList.set("ReturnSpecificProjectionEvents", ReturnSpecificProjectionEvents);
