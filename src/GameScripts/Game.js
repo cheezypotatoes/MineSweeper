@@ -5,9 +5,9 @@ class MineSweeperGame {
         this.height = 0;
         this.width = 0;
         this.tileAmount = 0;
-        this.bombIndexes = new Set()
-        this.adjacentCheckQueue = []
-        this.checkedTiles = new Set()
+        this.bombIndexes = new Set() // Stores all index that has a bomb.
+        this.adjacentCheckQueue = [] // Queue + Stack on what to check for adjacent number.
+        this.checkedTiles = new Set() // Avoids rechecking the tile index (avoids StackOverflow).
     }
 
     setHeightWidth({ height, width }) {
@@ -35,7 +35,7 @@ class MineSweeperGame {
 
         eventBus.emit("SendTileUncoveredEventToEventStore", { Event: Event });
         
-        // If the index is 0 then check it's corner if also 0
+        // If the index adjacent number is 0 then check it's corner if also 0.
         if (this.getAdjacentNumber({ index: index }) === 0) {
             this.checkedTiles.add(index);
             this.getAllCornersThatNotInSet({index: index})
@@ -45,7 +45,7 @@ class MineSweeperGame {
         return id // For unittest
     }
     
-    //TODO: THIS ONLY PUT STUFF THAT CORNERS WITH ADJACENT 0
+    
     getAllCornersThatNotInSet({ index }) {
         const corners = this.getAllCorners({index: index});
         for (let i = 0; i < corners.length; i++) {
@@ -54,20 +54,15 @@ class MineSweeperGame {
                 this.checkedTiles.add(corners[i])
             }
         }
-        
-        
     }
 
-
-    checker() {
+    // Check if the adjacent number for adjacentCheckQueue is 0 then make a tile "uncovered" event for it.
+    createEventForTilesWithZeroAdjacentCheckQueue() {
         while (this.adjacentCheckQueue.length > 0) {
             const currentPop = this.adjacentCheckQueue.shift();
             if (this.getAdjacentNumber({ index: currentPop }) === 0) {
-                console.log(currentPop)
                 this.TilePressed({index: currentPop})
             } 
-
-            
         }
     }
 
@@ -96,15 +91,6 @@ class MineSweeperGame {
         return [topLeft, topCenter, topRight, left, right, bottomLeft, bottomCenter, bottomRight].filter(item => item !== "");;
     }
 
-    CheckIfCornerIsNotOnTheCheckTilesSet({ corners }) {
-        const result = [];
-        for (const corner of corners) {
-            if (!this.checkedTiles.has(corner)) {
-                result.push(corner);
-            }
-        }
-        return result;
-    }
 
     getAdjacentNumber({ index }) {
         const corners = this.getAllCorners({ index: index });

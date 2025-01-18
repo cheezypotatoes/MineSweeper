@@ -15,7 +15,7 @@ function Tile( { index, isFlag, uncovered, UpdateEvent,} ) {
 
         eventBus.emit("TilePressed", {index: Index.current})
         UpdateEvent() // Grabs event from TileUncovered projection
-        eventBus.emit("Test")
+        eventBus.emit("CreateEventForTilesWithZeroAdjacentCheckQueue")
     }
 
     useEffect(() => {

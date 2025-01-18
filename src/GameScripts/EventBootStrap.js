@@ -9,8 +9,8 @@ const TilePressed = ({ index }) => {
 
 };
 
-const Test = () => {
-    MineSweeper.checker();
+const CreateEventForTilesWithZeroAdjacentCheckQueue = () => {
+    MineSweeper.createEventForTilesWithZeroAdjacentCheckQueue();
 }
 
 const SendTileUncoveredEventToEventStore = ({ Event }) => {
@@ -65,7 +65,7 @@ BootStrapList.set("ReturnNewSpecificProjectionEventIndexOnly", ReturnNewSpecific
 BootStrapList.set("GenerateBombs", GenerateBombs);
 BootStrapList.set("CheckIfIndexIsBomb", CheckIfIndexIsBomb);
 BootStrapList.set("GetAdjacentNumber", GetAdjacentNumber);
-BootStrapList.set("Test", Test)
+BootStrapList.set("CreateEventForTilesWithZeroAdjacentCheckQueue", CreateEventForTilesWithZeroAdjacentCheckQueue)
 
 
 export default BootStrapList;
