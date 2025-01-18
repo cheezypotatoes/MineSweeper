@@ -1,17 +1,32 @@
 /* eslint-disable no-undef */
 import { eventBus } from '../GameScripts/EventBus';
+import { MineSweeper } from '../GameScripts/Game';
 
 
 describe('BombGenerator', () => {
 
   test('returns a set with size 10', () => {
-    const result = eventBus.emit('GenerateBombs', { max: 50, amount: 10 });
+    MineSweeper.setHeightWidth({height: 10, width: 5});
+    const result = eventBus.emit('GenerateBombs', { amount: 10 });
     expect(result.size).toBe(10);
   });
 
   test('returns empty set if max < amount', () => {
-    const result = eventBus.emit('GenerateBombs', { max: 10, amount: 50 });
+    MineSweeper.setHeightWidth({height: 2, width: 5});
+    const result = eventBus.emit('GenerateBombs', { amount: 50 });
     expect(result.size).toBe(0);
+  });
+
+  test('test if returns 10', () => {
+    MineSweeper.setHeightWidth({height: 9, width: 9});
+    const result = eventBus.emit('GenerateBombs', { amount: 10 });
+    expect(result.size).toBe(10);
+  });
+
+  test('test if returns 2', () => {
+    MineSweeper.setHeightWidth({height: 3, width: 3});
+    const result = eventBus.emit('GenerateBombs', { amount: 2 });
+    expect(result.size).toBe(2);
   });
 
 })

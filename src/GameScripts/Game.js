@@ -17,9 +17,23 @@ class MineSweeperGame {
         this.tileAmount = (width * height);
     }
 
-    GenerateBomb() {
-        const generatedBombIndexSet = eventBus.emit("GenerateBombs", {max: this.height * this.width, amount: 2});
-        this.bombIndexes = generatedBombIndexSet;
+    GenerateBomb({ amount = 2 }) {
+        
+        const max = this.height *  this.width
+
+        if (max < amount) {return new Set();}
+        let bombIndexSet = new Set();
+        let i = 0;
+        while (i < amount) {
+            const bombIndex = Math.floor(Math.random() * max);
+            if (!bombIndexSet.has(bombIndex)) {
+                bombIndexSet.add(bombIndex);
+                i += 1;
+            }
+        }
+       
+        this.bombIndexes = bombIndexSet;
+        return bombIndexSet;
     }
 
     TilePressed({ index }) {

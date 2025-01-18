@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import "../assets/css/GameBoard.css"
 import { useEffect, useState, useRef } from "react";
 import Tile from "./Tile";
@@ -8,7 +7,7 @@ import { MineSweeper } from "../GameScripts/Game";
 function GameBoard() {
     const GameBoard = useRef(null);
     const [tiles, setTiles] = useState([]);
-    const [tilesSize, setTileSize] = useState([5, 5]);
+    const [tilesSize,] = useState([5, 5]);
     const [dugTileSet, setDugTileSet] = useState(new Set())
     const [dugTilesEvent, setDugTilesEvent] = useState([]);
 
@@ -74,7 +73,7 @@ function GameBoard() {
     }, [dugTileSet, tilesSize]);
 
     useEffect(() => {
-        MineSweeper.GenerateBomb()
+        eventBus.emit("GenerateBombs", {amount: 2})
     }, [])
 
     
