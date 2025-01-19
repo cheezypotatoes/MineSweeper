@@ -32,6 +32,7 @@ class MineSweeperGame {
         }
        
         this.bombIndexes = bombIndexSet;
+        console.log(this.bombIndexes)
         return bombIndexSet;
     }
 
@@ -53,12 +54,7 @@ class MineSweeperGame {
         if (this.getAdjacentNumber({ index: index }) === 0) {
             this.checkedTiles.add(index);
             this.getAllCornersThatNotInSet({index: index})
-        // If tile is not zero but first tile then reveal its corner
-        // TODO: NOT SURE IF THIS IS A FEATURE
-        } else if (this.firstTile === true && this.getAdjacentNumber({ index: index }) > 0) {
-            this.createEventForTIlesButFirstTileIsNotZero({index: index});
-        }
-        
+        } 
         return id // For unittest
     }
     
@@ -74,9 +70,14 @@ class MineSweeperGame {
     }
 
     // When changing the code while running, all tiles will go adjacent 0 due to react moment
+    // TODO: I think this will include tiles with bombs on it
     createEventForTilesWithZeroAdjacentCheckQueue() {
         while (this.adjacentCheckQueue.length > 0) {
             const currentPop = this.adjacentCheckQueue.shift();
+            if (this.bombIndexes.has(currentPop)) {
+                continue;
+            }
+
             if (this.firstTile === false && this.getAdjacentNumber({ index: currentPop }) === 0) {
                 this.TilePressed({index: currentPop})
             } else if (this.firstTile === true){
@@ -86,6 +87,7 @@ class MineSweeperGame {
         this.setFirstTileToFalse();
     }
 
+    // TODO: CHECK IF FEATURE ALSO WILL CAUSE BUG IF USES TILE PRESSED DUE TO SET FIRST TILE FUNCTION TO FALSE
     createEventForTIlesButFirstTileIsNotZero({ index }) {
         this.setFirstTileToFalse();
         const corners = this.getAllCorners({index: index})
