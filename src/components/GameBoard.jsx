@@ -6,7 +6,7 @@ import { eventBus } from "../GameScripts/EventBus"
 function GameBoard() {
     const GameBoard = useRef(null);
     const [tiles, setTiles] = useState([]);
-    const [tilesSize,] = useState([9, 9]); // TODO: Causes crash if change directly, make a safe way to change by removing elements in state such as dugTileSet.
+    const [tilesSize,] = useState([15, 15]); // TODO: Causes crash if change directly, make a safe way to change by removing elements in state such as dugTileSet.
     const [dugTileSet, setDugTileSet] = useState(new Set())
     const [dugTilesEvent, setDugTilesEvent] = useState([]);
 
@@ -73,7 +73,7 @@ function GameBoard() {
     }, [dugTileSet, tilesSize]);
 
     useEffect(() => {
-        eventBus.emit("GenerateBombs", {amount: 2})
+        eventBus.emit("GenerateBombs", {amount: 50})
     }, [])
 
     

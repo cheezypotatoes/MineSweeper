@@ -1,11 +1,10 @@
 import { eventBus } from "./EventBus";
-// TODO: Store all uncovered tiles and if first tile was uncovered, check all corners of the uncovered tiles to uncover tiles with adjacent number more than one. Avoid uncovering bomb tiles.
-// TODO: If tile is 1 then get all its corner that is not a bomb instead
 class MineSweeperGame {
     constructor() {
         this.height = 0;
         this.width = 0;
         this.tileAmount = 0;
+        this.firstTile = true;
         this.bombIndexes = new Set() // Stores all index that has a bomb.
         this.adjacentCheckQueue = [] // Queue + Stack on what to check for adjacent number.
         this.checkedTiles = new Set() // Avoids rechecking the tile index (avoids StackOverflow).
@@ -54,7 +53,10 @@ class MineSweeperGame {
         if (this.getAdjacentNumber({ index: index }) === 0) {
             this.checkedTiles.add(index);
             this.getAllCornersThatNotInSet({index: index})
-            
+        // If tile is not zero but first tile then reveal its corner
+        // TODO: NOT SURE IF THIS IS A FEATURE
+        } else if (this.firstTile === true && this.getAdjacentNumber({ index: index }) > 0) {
+            this.createEventForTIlesButFirstTileIsNotZero({index: index});
         }
         
         return id // For unittest
@@ -71,13 +73,26 @@ class MineSweeperGame {
         }
     }
 
-    // Check if the adjacent number for adjacentCheckQueue is 0 then make a tile "uncovered" event for it.
+    // When changing the code while running, all tiles will go adjacent 0 due to react moment
     createEventForTilesWithZeroAdjacentCheckQueue() {
         while (this.adjacentCheckQueue.length > 0) {
             const currentPop = this.adjacentCheckQueue.shift();
-            if (this.getAdjacentNumber({ index: currentPop }) === 0) {
+            if (this.firstTile === false && this.getAdjacentNumber({ index: currentPop }) === 0) {
                 this.TilePressed({index: currentPop})
-            } 
+            } else if (this.firstTile === true){
+                this.TilePressed({index: currentPop})
+            }
+        }
+        this.setFirstTileToFalse();
+    }
+
+    createEventForTIlesButFirstTileIsNotZero({ index }) {
+        this.setFirstTileToFalse();
+        const corners = this.getAllCorners({index: index})
+        for (let i = 0; i < corners.length; i++) {
+            if (!this.bombIndexes.has(corners[i])) {
+                this.TilePressed({index: corners[i]})
+            }
         }
     }
 
@@ -123,6 +138,10 @@ class MineSweeperGame {
 
     returnBombIndex() {
         return this.bombIndexes;
+    }
+
+    setFirstTileToFalse() {
+        this.firstTile = false;
     }
 }
 
