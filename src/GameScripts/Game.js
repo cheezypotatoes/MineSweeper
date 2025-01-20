@@ -4,7 +4,6 @@ class MineSweeperGame {
         this.height = 0;
         this.width = 0;
         this.tileAmount = 0;
-        this.firstTile = true;
         this.bombIndexes = new Set() // Stores all index that has a bomb.
         this.adjacentCheckQueue = [] // Queue + Stack on what to check for adjacent number.
         this.checkedTiles = new Set() // Avoids rechecking the tile index (avoids StackOverflow).
@@ -32,7 +31,6 @@ class MineSweeperGame {
         }
        
         this.bombIndexes = bombIndexSet;
-        console.log(this.bombIndexes)
         return bombIndexSet;
     }
 
@@ -51,10 +49,11 @@ class MineSweeperGame {
         eventBus.emit("SendTileUncoveredEventToEventStore", { Event: Event });
         
         // If the index adjacent number is 0 then check it's corner if also 0.
-        if (this.getAdjacentNumber({ index: index }) === 0) {
+        if (this.getAdjacentNumber({ index: index }) === 0 || this.checkedTiles.size === 0) {
             this.checkedTiles.add(index);
             this.getAllCornersThatNotInSet({index: index})
         } 
+        
         return id // For unittest
     }
     
@@ -70,32 +69,14 @@ class MineSweeperGame {
     }
 
     // When changing the code while running, all tiles will go adjacent 0 due to react moment
-    // TODO: I think this will include tiles with bombs on it
     createEventForTilesWithZeroAdjacentCheckQueue() {
         while (this.adjacentCheckQueue.length > 0) {
             const currentPop = this.adjacentCheckQueue.shift();
             if (this.bombIndexes.has(currentPop)) {
                 continue;
             }
-
-            if (this.firstTile === false && this.getAdjacentNumber({ index: currentPop }) === 0) {
-                this.TilePressed({index: currentPop})
-            } else if (this.firstTile === true){
-                this.TilePressed({index: currentPop})
-            }
-        }
-        this.setFirstTileToFalse();
-    }
-
-    // TODO: CHECK IF FEATURE ALSO WILL CAUSE BUG IF USES TILE PRESSED DUE TO SET FIRST TILE FUNCTION TO FALSE
-    createEventForTIlesButFirstTileIsNotZero({ index }) {
-        this.setFirstTileToFalse();
-        const corners = this.getAllCorners({index: index})
-        for (let i = 0; i < corners.length; i++) {
-            if (!this.bombIndexes.has(corners[i])) {
-                this.TilePressed({index: corners[i]})
-            }
-        }
+            this.TilePressed({index: currentPop})
+        }    
     }
 
     getAllCorners({ index }) {
@@ -123,7 +104,6 @@ class MineSweeperGame {
         return [topLeft, topCenter, topRight, left, right, bottomLeft, bottomCenter, bottomRight].filter(item => item !== "");;
     }
 
-
     getAdjacentNumber({ index }) {
         const corners = this.getAllCorners({ index: index });
         let bombCount = 0;
@@ -140,10 +120,6 @@ class MineSweeperGame {
 
     returnBombIndex() {
         return this.bombIndexes;
-    }
-
-    setFirstTileToFalse() {
-        this.firstTile = false;
     }
 }
 
