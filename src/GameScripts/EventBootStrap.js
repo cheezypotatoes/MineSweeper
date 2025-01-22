@@ -8,6 +8,10 @@ const TilePressed = ({ index }) => {
     MineSweeper.TilePressed({ index: index });
 };
 
+const CreateFlagEvent = ({ index }) => {
+    MineSweeper.CreateFlagEvent({ index: index });
+}
+
 const SetBoardSize = ({ height, width }) => {
     MineSweeper.setHeightWidth({ height: height, width: width }) 
 };
@@ -49,6 +53,7 @@ const GetAdjacentNumber = ({ index }) => {
 }
 
 BootStrapList.set("TilePressed", TilePressed);
+BootStrapList.set("CreateFlagEvent", CreateFlagEvent);
 BootStrapList.set("SetBoardSize", SetBoardSize);
 BootStrapList.set("SendTileUncoveredEventToEventStore", SendTileUncoveredEventToEventStore);
 BootStrapList.set("ApplyEventToProjectionManager", ApplyEventToProjectionManager);

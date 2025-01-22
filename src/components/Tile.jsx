@@ -10,12 +10,17 @@ function Tile( { index, isFlag, uncovered, UpdateEvent,} ) {
     const Index = useRef(index);
     const TileStatus = useRef();
 
-    const TilePressed = () => {
+    const TilePressed = (e) => {
         if (uncovered) {return}
 
-        eventBus.emit("TilePressed", {index: Index.current})
-        UpdateEvent()
-        eventBus.emit("CreateEventForTilesWithZeroAdjacentCheckQueue")
+        if (e.type === "click") {
+            eventBus.emit("TilePressed", {index: Index.current})
+            UpdateEvent();
+            eventBus.emit("CreateEventForTilesWithZeroAdjacentCheckQueue");
+        } else if (e.type === 'contextmenu') {
+            e.preventDefault();
+            eventBus.emit("CreateFlagEvent", {index: Index.current});
+        }
     }
 
     useEffect(() => {
@@ -29,7 +34,7 @@ function Tile( { index, isFlag, uncovered, UpdateEvent,} ) {
 
    
     return (
-        <div className={`Tile ${uncovered ? 'revealed' : 'uncovered'}`}  onClick={TilePressed}>
+        <div className={`Tile ${uncovered ? 'revealed' : 'uncovered'}`}  onClick={TilePressed} onContextMenu={TilePressed}>
             <h1 className="TestTileText" ref={TileStatus}></h1> 
         </div>
     )

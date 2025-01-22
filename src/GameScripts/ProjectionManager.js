@@ -1,9 +1,11 @@
 import { TileUncovered_Projection } from "./TileUncoveredProjection"
+import { TileFlagged_Projection } from "./TileFlaggedProjection";
 
 class ProjectionManagerClass {
     constructor() {
         this.projections = {
             UncoveredTile: new TileUncovered_Projection(),
+            FlaggedTile: new TileFlagged_Projection(),
         }
     }
 

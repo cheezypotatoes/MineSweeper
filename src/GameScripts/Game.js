@@ -7,6 +7,7 @@ class MineSweeperGame {
         this.bombIndexes = new Set() // Stores all index that has a bomb.
         this.adjacentCheckQueue = [] // Queue + Stack on what to check for adjacent number.
         this.checkedTiles = new Set() // Avoids rechecking the tile index (avoids StackOverflow).
+        this.flaggedTiles = new Set() // Stores all index that has a flag.
     }
 
     setHeightWidth({ height, width }) {
@@ -42,7 +43,6 @@ class MineSweeperGame {
             index: index,
             timeStamp: new Date().toISOString().replace('T', ' ').slice(0, 19),
             isBomb: this.bombIndexes.has(index) ? true: false,
-            isFlagged: false, // UNFINISHED
             adjacentNumber: this.getAdjacentNumber({ index: index }),
         }
 
@@ -55,6 +55,16 @@ class MineSweeperGame {
         } 
         
         return id // For unittest
+    }
+
+    // TODO: Check the flagged status then change it to the opposite. then pass the event to the event store
+    CreateFlagEvent({ index }) { 
+        const Event = {
+            type: "FlaggedTile",
+            index: index,
+            isFlagged: true,
+        };
+        eventBus.emit("SendTileUncoveredEventToEventStore", { Event: Event });
     }
     
     

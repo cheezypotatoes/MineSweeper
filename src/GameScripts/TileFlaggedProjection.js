@@ -1,4 +1,4 @@
-export class TileUncovered_Projection {
+export class TileFlagged_Projection {
     constructor() {
         this.events = [];
     }
@@ -7,13 +7,15 @@ export class TileUncovered_Projection {
 
         let SpecifiedEvent = {
             index: Event.index,
-            isBomb: Event.isBomb,
-            adjacentNumber: Event.adjacentNumber,
+            isFlagged: Event.isFlagged,
         };
         this.events.push(SpecifiedEvent);
        
-
         this.returnEvents(); // Just for testing ignore this
+    }
+
+    returnSpecificEventFlaggedStatus({ index }) {  
+        return this.event[index].isFlagged;
     }
 
     returnEvents() {
