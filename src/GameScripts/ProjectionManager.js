@@ -7,6 +7,13 @@ class ProjectionManagerClass {
             UncoveredTile: new TileUncovered_Projection(),
             FlaggedTile: new TileFlagged_Projection(),
         }
+
+        this.projectionSpecialMethods = {
+            FlaggedTile: new Map([
+                ["returnProjectionLatestSnapshot", () => this.projections["FlaggedTile"].returnProjectionLatestSnapshot()]
+            ])
+        };
+        
     }
 
     // Give the latest events to the projections.
@@ -33,6 +40,12 @@ class ProjectionManagerClass {
     returnNewSpecificProjectionEventIndexOnly ({ ProjectionType }) {
         return this.projections[ProjectionType].returnLatestEventIndexOnly();
     }
+
+    //TODO: FIX
+    callProjectionSpecialMethod({ ProjectionType, MethodName }) { 
+        return this.projectionSpecialMethods[ProjectionType].get(MethodName)();     
+    }
+    
     
 }
 

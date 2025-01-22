@@ -40,6 +40,14 @@ const ReturnNewSpecificProjectionEventIndexOnly = ({ ProjectionType }) => {
     return ProjectionManager.returnNewSpecificProjectionEventIndexOnly({ ProjectionType:ProjectionType });
 };
 
+const ReturnTileFlaggedLatestProjectionSnapshot = () => { 
+    return ProjectionManager.returnProjectionLatestSnapshot({ ProjectionType: "FlaggedTile" });
+}
+
+const ReturnProjectionSpecialMethod = ({ ProjectionType, MethodName }) => { 
+    return ProjectionManager.callProjectionSpecialMethod({ ProjectionType: ProjectionType, MethodName: MethodName });
+}
+
 const GenerateBombs = ({ amount }) => {
     return MineSweeper.GenerateBomb({amount: amount});
 }
@@ -60,6 +68,8 @@ BootStrapList.set("ApplyEventToProjectionManager", ApplyEventToProjectionManager
 BootStrapList.set("ReturnSpecificProjectionEvents", ReturnSpecificProjectionEvents);
 BootStrapList.set("ReturnNewSpecificProjectionEvent", ReturnNewSpecificProjectionEvent);
 BootStrapList.set("ReturnNewSpecificProjectionEventIndexOnly", ReturnNewSpecificProjectionEventIndexOnly);
+BootStrapList.set("ReturnTileFlaggedLatestProjectionSnapshot", ReturnTileFlaggedLatestProjectionSnapshot);
+BootStrapList.set("ReturnProjectionSpecialMethod", ReturnProjectionSpecialMethod);
 BootStrapList.set("GenerateBombs", GenerateBombs);
 BootStrapList.set("CheckIfIndexIsBomb", CheckIfIndexIsBomb);
 BootStrapList.set("GetAdjacentNumber", GetAdjacentNumber);

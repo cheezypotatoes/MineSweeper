@@ -9,7 +9,10 @@ function GameBoard() {
     const [tilesSize,] = useState([9, 9]); // TODO: Causes crash if change directly, make a safe way to change by removing elements in state such as dugTileSet.
     const [dugTileSet, setDugTileSet] = useState(new Set())
     const [dugTilesEvent, setDugTilesEvent] = useState([]);
+    const [flaggedTileSet, setFlaggedTileSet] = useState(new Set());
 
+
+    // TODO: Auto tile removal must not include flagged tiles
     // TODO: Make tiles adjust properly depending on the size to avoid overflow
     // TODO: Right clicking adds a flag that avoids uncovering.
     // TODO: If first tile is a bomb, then re-generate that specific bomb
@@ -45,23 +48,42 @@ function GameBoard() {
 
     // If the size, setOfDugTiles Changes, then re-display the tiles on the board
     useEffect(() => {
-        const UpdateTileEvents = () => {
+        const UpdateUncoveredEvents = () => {
             const newEvent = eventBus.emit("ReturnNewSpecificProjectionEventIndexOnly", { ProjectionType: "UncoveredTile" });
             setDugTilesEvent(prevEvents => [...prevEvents, newEvent]);
             handleAutomaticallyUncoveredTiles();
         }
+
+        const UpdateFlagEvents = () => {
+            const newEvent = eventBus.emit("ReturnProjectionSpecialMethod", {ProjectionType: "FlaggedTile", MethodName: "returnProjectionLatestSnapshot"});
+            for (const [key, value] of newEvent) {
+                if (value === true) {
+                    setFlaggedTileSet((prevSet) => {
+                        const updatedSet = new Set(prevSet);
+                        updatedSet.add(key);
+                        return updatedSet;
+                    });
+                }
+            }
+        }
+
+        
 
         const tilesAmount = tilesSize[1] * tilesSize[0];
         const tiles = [];
 
         for (let i = 0; i < tilesAmount; i++) {
             let isDug = dugTileSet.has(i)? true : false
+            let isFlagged = flaggedTileSet.has(i)? true : false
+            
+            
             //TODO: Make it return a function call that check if the index on this specific tile is flagged
-            tiles.push(<Tile key={i} index={i} isFlag={false} uncovered={isDug} UpdateEvent={UpdateTileEvents}/>);
+
+            tiles.push(<Tile key={i} index={i} isFlag={isFlagged} uncovered={isDug} UpdateUncoveredEvents={UpdateUncoveredEvents} UpdateFlagEvents={UpdateFlagEvents}/>);
         }
 
         setTiles(tiles)
-    }, [dugTileSet, tilesSize]);
+    }, [dugTileSet, tilesSize, flaggedTileSet]);
 
     useEffect(() => {
         eventBus.emit("GenerateBombs", {amount: 25})
