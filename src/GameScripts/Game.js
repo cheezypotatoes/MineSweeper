@@ -41,7 +41,7 @@ class MineSweeperGame {
             type: "UncoveredTile",
             index: index,
             timeStamp: new Date().toISOString().replace('T', ' ').slice(0, 19),
-            isBomb: this.bombIndexes.has(index) ? true: false, // UNFINISHED
+            isBomb: this.bombIndexes.has(index) ? true: false,
             isFlagged: false, // UNFINISHED
             adjacentNumber: this.getAdjacentNumber({ index: index }),
         }

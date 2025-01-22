@@ -6,35 +6,27 @@ import { eventBus } from "../GameScripts/EventBus"
 function GameBoard() {
     const GameBoard = useRef(null);
     const [tiles, setTiles] = useState([]);
-    const [tilesSize,] = useState([5, 5]); // TODO: Causes crash if change directly, make a safe way to change by removing elements in state such as dugTileSet.
+    const [tilesSize,] = useState([9, 9]); // TODO: Causes crash if change directly, make a safe way to change by removing elements in state such as dugTileSet.
     const [dugTileSet, setDugTileSet] = useState(new Set())
     const [dugTilesEvent, setDugTilesEvent] = useState([]);
 
     // TODO: Make tiles adjust properly depending on the size to avoid overflow
-    // TODO: Huge uncovering CONDITION FOR FIRST TILE UNCOVERED
-    // TODO: Find a way to check all tiles per click and if all tiles around is uncovered then don't show numbers
     // TODO: Right clicking adds a flag that avoids uncovering.
+    // TODO: If first tile is a bomb, then re-generate that specific bomb
     // TODO: Huge bomb?
 
     // TODO: MORE TEST
 
-    // TODO: OPTIMIZE AND REFRACTOR
-    const testing = () => {
+    const handleAutomaticallyUncoveredTiles = () => {
         const event = eventBus.emit("ReturnSpecificProjectionEvents", {ProjectionType: "UncoveredTile"})
-        
         setDugTileSet((prevSet) => {
-            const newSet = new Set(prevSet);
-            event.forEach((tile) => {
-              if (!newSet.has(tile.index)) {
-                newSet.add(tile.index); // Add index to the set
-              }
-            });
-            return newSet;
+            const updatedSet = new Set(prevSet);
+            for (const tile of event) {
+                updatedSet.add(tile.index);
+            }
+            return updatedSet;
           });
     }
-
-
-    
 
     // Change dug tiles event if the event changes
     useEffect(() => {
@@ -53,11 +45,10 @@ function GameBoard() {
 
     // If the size, setOfDugTiles Changes, then re-display the tiles on the board
     useEffect(() => {
-        // Update event by grabbing the latest event from projection
-        const UpdateEvent = () => {
+        const UpdateTileEvents = () => {
             const newEvent = eventBus.emit("ReturnNewSpecificProjectionEventIndexOnly", { ProjectionType: "UncoveredTile" });
             setDugTilesEvent(prevEvents => [...prevEvents, newEvent]);
-            testing()
+            handleAutomaticallyUncoveredTiles();
         }
 
         const tilesAmount = tilesSize[1] * tilesSize[0];
@@ -66,14 +57,14 @@ function GameBoard() {
         for (let i = 0; i < tilesAmount; i++) {
             let isDug = dugTileSet.has(i)? true : false
             //TODO: Make it return a function call that check if the index on this specific tile is flagged
-            tiles.push(<Tile key={i} index={i} isFlag={false} uncovered={isDug} UpdateEvent={UpdateEvent}/>);
+            tiles.push(<Tile key={i} index={i} isFlag={false} uncovered={isDug} UpdateEvent={UpdateTileEvents}/>);
         }
 
         setTiles(tiles)
     }, [dugTileSet, tilesSize]);
 
     useEffect(() => {
-        eventBus.emit("GenerateBombs", {amount: 2})
+        eventBus.emit("GenerateBombs", {amount: 25})
     }, [])
 
     

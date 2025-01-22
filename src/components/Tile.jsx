@@ -14,16 +14,14 @@ function Tile( { index, isFlag, uncovered, UpdateEvent,} ) {
         if (uncovered) {return}
 
         eventBus.emit("TilePressed", {index: Index.current})
-        UpdateEvent() // Grabs event from TileUncovered projection
+        UpdateEvent()
         eventBus.emit("CreateEventForTilesWithZeroAdjacentCheckQueue")
     }
 
     useEffect(() => {
         if (uncovered) {
             let isBomb = eventBus.emit("CheckIfIndexIsBomb", {index: index});
-            // If it's not a bomb then get its number
             TileStatus.current.textContent = isBomb ? "💣" : eventBus.emit("GetAdjacentNumber", {index: index});
-
         }
     }, [uncovered, index])
 
