@@ -35,6 +35,16 @@ class MineSweeperGame {
         return bombIndexSet;
     }
 
+    ReRandomizedSpecificBomb({ index }) {
+        if (!this.bombIndexes.has(index)) {return;}
+        this.bombIndexes.delete(index);
+        let newBombIndex = Math.floor(Math.random() * this.tileAmount);
+        while (this.bombIndexes.has(newBombIndex)) {
+            newBombIndex = Math.floor(Math.random() * this.tileAmount);
+        }
+        this.bombIndexes.add(newBombIndex);
+    }
+
     TilePressed({ index }) {
         const id = `id_${Date.now()}_${Math.random().toString(36).substring(2, 10)}`
         let Event = {
@@ -46,18 +56,23 @@ class MineSweeperGame {
             adjacentNumber: this.getAdjacentNumber({ index: index }),
         }
 
-        eventBus.emit("SendTileUncoveredEventToEventStore", { Event: Event });
+        if (this.checkedTiles.size === 0 && this.bombIndexes.has(index)) { 
+            console.log("FIST BOMB")
+            this.ReRandomizedSpecificBomb({ index: index });
+        }
         
+        eventBus.emit("SendTileUncoveredEventToEventStore", { Event: Event });
         // If the index adjacent number is 0 then check it's corner if also 0.
         if (this.getAdjacentNumber({ index: index }) === 0 || this.checkedTiles.size === 0) {
             this.checkedTiles.add(index);
-            this.getAllCornersThatNotInSet({index: index})
+            this.getAllCornersThatNotInSet({index: index});
         } 
+
         
-        return id // For unittest
+        
+        return id; // For unittest
     }
 
-    // TODO: Check the flagged status then change it to the opposite. then pass the event to the event store
     CreateFlagEvent({ index }) { 
         const Event = {
             type: "FlaggedTile",

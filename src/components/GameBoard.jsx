@@ -15,8 +15,6 @@ function GameBoard() {
 
     // TODO: Auto tile removal must not include flagged tiles
     // TODO: Make tiles adjust properly depending on the size to avoid overflow
-    // TODO: Right clicking adds a flag that avoids uncovering.
-    // TODO: If first tile is a bomb, then re-generate that specific bomb
     // TODO: Huge bomb?
 
     // TODO: MORE TEST
@@ -87,7 +85,7 @@ function GameBoard() {
     }, [dugTileSet, tilesSize, flaggedTileSet]);
 
     useEffect(() => {
-        eventBus.emit("GenerateBombs", {amount: 25})
+        eventBus.emit("GenerateBombs", {amount: 40})
     }, [])
 
     

@@ -41,7 +41,7 @@ class ProjectionManagerClass {
         return this.projections[ProjectionType].returnLatestEventIndexOnly();
     }
 
-    //TODO: FIX
+    
     callProjectionSpecialMethod({ ProjectionType, MethodName }) { 
         return this.projectionSpecialMethods[ProjectionType].get(MethodName)();     
     }
