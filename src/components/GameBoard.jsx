@@ -21,6 +21,10 @@ function GameBoard() {
 
     // TODO: MORE TEST
 
+    const PreventDefault = (e) => {
+        e.preventDefault();
+    };
+
     const handleAutomaticallyUncoveredTiles = () => {
         const event = eventBus.emit("ReturnSpecificProjectionEvents", {ProjectionType: "UncoveredTile"})
         setDugTileSet((prevSet) => {
@@ -47,7 +51,6 @@ function GameBoard() {
     }, [flaggedTileEvent])
 
   
-    
     // Set board size
     useEffect(() => {
         GameBoard.current.style.gridTemplateColumns = `repeat(${tilesSize[0]}, 1fr)`;
@@ -89,7 +92,7 @@ function GameBoard() {
 
     
     return (
-        <div id="GameBoard" ref={GameBoard}>
+        <div id="GameBoard" ref={GameBoard} onContextMenu={PreventDefault}>
             {tiles}
         </div>
     )
