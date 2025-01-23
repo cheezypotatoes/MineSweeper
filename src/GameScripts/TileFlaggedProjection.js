@@ -5,11 +5,11 @@ export class TileFlagged_Projection {
     }
 
     addEvent({ Event }) {
-        this.returnSpecificEventFlaggedStatus({ index: Event.index })
+        
 
         let SpecifiedEvent = {
             index: Event.index,
-            isFlagged: true,
+            isFlagged: this.returnSpecificEventFlaggedStatus({ index: Event.index }),
         };
 
         // Hashmap projection
@@ -23,8 +23,18 @@ export class TileFlagged_Projection {
     returnSpecificEventFlaggedStatus({ index }) {  
         if (this.eventsProjection.has(index)) {
             let value = this.eventsProjection.get(index);
-            console.log(value)
-        } 
+            
+            if (value === true) {
+                this.eventsProjection.set(index, false);
+                return false;
+            } else {
+                this.eventsProjection.set(index, true);
+                return true;
+            }
+            
+        } else {
+            return true;
+        }
         
     }
 
@@ -40,7 +50,14 @@ export class TileFlagged_Projection {
         return this.events[this.events.length - 1].index;
     }
 
+    // Only returns all true values should change function name later
     returnProjectionLatestSnapshot() {
-        return this.eventsProjection;
+        let returnMap = new Map();
+        for (const [key, value] of this.eventsProjection) {
+            if (value === true) {
+                returnMap.set(key, value);
+            }
+        }
+        return returnMap;  
     }
 }

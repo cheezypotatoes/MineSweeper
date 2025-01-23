@@ -9,6 +9,7 @@ function GameBoard() {
     const [tilesSize,] = useState([9, 9]); // TODO: Causes crash if change directly, make a safe way to change by removing elements in state such as dugTileSet.
     const [dugTileSet, setDugTileSet] = useState(new Set())
     const [dugTilesEvent, setDugTilesEvent] = useState([]);
+    const [flaggedTileEvent, setFlaggedTileEvent] = useState([]);
     const [flaggedTileSet, setFlaggedTileSet] = useState(new Set());
 
 
@@ -31,6 +32,7 @@ function GameBoard() {
           });
     }
 
+
     // Change dug tiles event if the event changes
     useEffect(() => {
         let latestEvent = dugTilesEvent[dugTilesEvent.length - 1];
@@ -38,6 +40,13 @@ function GameBoard() {
         let latestEventIndex = latestEvent;
         setDugTileSet(prevSet => new Set(prevSet).add(latestEventIndex));
     }, [dugTilesEvent]);
+
+    // Change flagged tiles event if the event changes
+    useEffect(() => {  
+        setFlaggedTileSet(new Set(flaggedTileEvent))    
+    }, [flaggedTileEvent])
+
+  
     
     // Set board size
     useEffect(() => {
@@ -45,6 +54,7 @@ function GameBoard() {
         GameBoard.current.style.gridTemplateRows = `repeat(${tilesSize[1]}, 1fr)`;
         eventBus.emit("SetBoardSize", {height: tilesSize[0], width: tilesSize[1]});
     }, [tilesSize])
+
 
     // If the size, setOfDugTiles Changes, then re-display the tiles on the board
     useEffect(() => {
@@ -56,18 +66,9 @@ function GameBoard() {
 
         const UpdateFlagEvents = () => {
             const newEvent = eventBus.emit("ReturnProjectionSpecialMethod", {ProjectionType: "FlaggedTile", MethodName: "returnProjectionLatestSnapshot"});
-            for (const [key, value] of newEvent) {
-                if (value === true) {
-                    setFlaggedTileSet((prevSet) => {
-                        const updatedSet = new Set(prevSet);
-                        updatedSet.add(key);
-                        return updatedSet;
-                    });
-                }
-            }
+            const newArray = Array.from(newEvent, ([key]) => key);
+            setFlaggedTileEvent(newArray);
         }
-
-        
 
         const tilesAmount = tilesSize[1] * tilesSize[0];
         const tiles = [];
@@ -76,9 +77,6 @@ function GameBoard() {
             let isDug = dugTileSet.has(i)? true : false
             let isFlagged = flaggedTileSet.has(i)? true : false
             
-            
-            //TODO: Make it return a function call that check if the index on this specific tile is flagged
-
             tiles.push(<Tile key={i} index={i} isFlag={isFlagged} uncovered={isDug} UpdateUncoveredEvents={UpdateUncoveredEvents} UpdateFlagEvents={UpdateFlagEvents}/>);
         }
 

@@ -23,9 +23,20 @@ function Tile( { index, isFlag, uncovered, UpdateUncoveredEvents, UpdateFlagEven
         }
     }
 
-    //TODO: MAKE FLAG TURN OFF WHEN RIGHT CLICKED AGAIN
+    //TODO: OPTIMIZED THIS FUNCTION
     const preventContextMenuOnH1 = (e) => {
-        e.preventDefault();
+        if (uncovered) {return}
+        if (e.type === "click" && !isFlag) {
+            eventBus.emit("TilePressed", {index: Index.current})
+            UpdateUncoveredEvents();
+            eventBus.emit("CreateEventForTilesWithZeroAdjacentCheckQueue");
+        } else if (e.type === 'contextmenu') {
+            e.preventDefault();
+            eventBus.emit("CreateFlagEvent", {index: Index.current});
+            UpdateFlagEvents();
+           
+        }
+        
     };
 
     useEffect(() => {
@@ -42,7 +53,7 @@ function Tile( { index, isFlag, uncovered, UpdateUncoveredEvents, UpdateFlagEven
    
     return (
         <div className={`Tile ${uncovered ? 'revealed' : 'uncovered'}`}  onClick={TilePressed} onContextMenu={TilePressed}>
-            <h1 className="TestTileText" ref={TileStatus} onContextMenu={preventContextMenuOnH1}></h1> 
+            <h1 className="TestTileText" ref={TileStatus} onContextMenu={preventContextMenuOnH1} onClick={preventContextMenuOnH1}></h1> 
         </div>
     )
 }
