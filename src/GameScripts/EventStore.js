@@ -29,6 +29,7 @@ class Event_Store {
 
     clearEvents() {
         this.store = [];
+        console.log("Event store cleared:", this.store);
     }
 }
 

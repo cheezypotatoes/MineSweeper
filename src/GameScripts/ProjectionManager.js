@@ -22,13 +22,6 @@ class ProjectionManagerClass {
         projectionMatched.addEvent({ Event: Event })
     } 
 
-    // Clear all projection to re-apply all events
-    clearAllProjections() {
-        Object.entries(this.projections).forEach(([, instance]) => {
-            instance.clearEvents();
-        });
-    }
-
     returnSpecificProjectionEvent({ ProjectionType }) {
         return this.projections[ProjectionType].returnEvents();
     }
@@ -44,6 +37,13 @@ class ProjectionManagerClass {
     
     callProjectionSpecialMethod({ ProjectionType, MethodName }) { 
         return this.projectionSpecialMethods[ProjectionType].get(MethodName)();     
+    }
+
+    clearEvents() {
+        for (const key in this.projections) {
+            const instance = this.projections[key];
+            instance.clearEvents();
+        }
     }
     
     

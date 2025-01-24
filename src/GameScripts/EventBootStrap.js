@@ -60,6 +60,18 @@ const GetAdjacentNumber = ({ index }) => {
     return MineSweeper.getAdjacentNumber({ index: index });
 }
 
+// TODO: MAKE TEST FOR THIS FUNCTION
+const ResetEntireData = () => {
+    EventStore.clearEvents();
+    ProjectionManager.clearEvents();
+    MineSweeper.resetGame();
+    console.log("DELETED SUCCESSFULLY")
+}
+
+const ReturnIsBombUncovered = () => {
+    return MineSweeper.returnIsBombUncovered();
+}
+
 BootStrapList.set("TilePressed", TilePressed);
 BootStrapList.set("CreateFlagEvent", CreateFlagEvent);
 BootStrapList.set("SetBoardSize", SetBoardSize);
@@ -74,7 +86,8 @@ BootStrapList.set("GenerateBombs", GenerateBombs);
 BootStrapList.set("CheckIfIndexIsBomb", CheckIfIndexIsBomb);
 BootStrapList.set("GetAdjacentNumber", GetAdjacentNumber);
 BootStrapList.set("CreateEventForTilesWithZeroAdjacentCheckQueue", CreateEventForTilesWithZeroAdjacentCheckQueue)
-
+BootStrapList.set("ResetEntireData", ResetEntireData);
+BootStrapList.set("ReturnIsBombUncovered", ReturnIsBombUncovered);
 
 export default BootStrapList;
 

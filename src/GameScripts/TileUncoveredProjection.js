@@ -27,4 +27,9 @@ export class TileUncovered_Projection {
     returnLatestEventIndexOnly() {
         return this.events[this.events.length - 1].index;
     }
+
+    clearEvents() {
+        this.events = [];
+        console.log("CLEARED TILE UNCOVERED", this.events)
+    }
 }

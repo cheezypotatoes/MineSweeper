@@ -8,6 +8,7 @@ class MineSweeperGame {
         this.adjacentCheckQueue = [] // Queue + Stack on what to check for adjacent number.
         this.checkedTiles = new Set() // Avoids rechecking the tile index (avoids StackOverflow).
         this.flaggedTiles = new Set() // Stores all index that has a flag.
+        this.BombUncovered = false;
     }
 
     setHeightWidth({ height, width }) {
@@ -46,6 +47,7 @@ class MineSweeperGame {
     }
 
     TilePressed({ index }) {
+        if (this.BombUncovered) {return;}
         const id = `id_${Date.now()}_${Math.random().toString(36).substring(2, 10)}`
         let Event = {
             id: id,
@@ -59,11 +61,13 @@ class MineSweeperGame {
         if (this.checkedTiles.size === 0 && this.bombIndexes.has(index)) { 
             console.log("FIST BOMB")
             this.ReRandomizedSpecificBomb({ index: index });
+        } else if (this.bombIndexes.has(index)) {
+            this.BombUncovered = true
         }
         
         eventBus.emit("SendTileUncoveredEventToEventStore", { Event: Event });
         // If the index adjacent number is 0 then check it's corner if also 0.
-        if (this.getAdjacentNumber({ index: index }) === 0 || this.checkedTiles.size === 0) {
+        if ((this.getAdjacentNumber({ index: index }) === 0 || this.checkedTiles.size === 0) && !this.BombUncovered) {
             this.checkedTiles.add(index);
             this.getAllCornersThatNotInSet({index: index});
         } 
@@ -145,6 +149,18 @@ class MineSweeperGame {
 
     returnBombIndex() {
         return this.bombIndexes;
+    }
+
+    returnIsBombUncovered() {
+        return this.BombUncovered;
+    }
+
+    resetGame() {
+        this.bombIndexes = new Set();
+        this.adjacentCheckQueue = [];
+        this.checkedTiles = new Set();
+        this.flaggedTiles = new Set();
+        this.BombUncovered = false;
     }
 }
 

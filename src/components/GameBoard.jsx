@@ -1,24 +1,44 @@
+/* eslint-disable no-unused-vars */
 import "../assets/css/GameBoard.css"
 import { useEffect, useState, useRef } from "react";
 import Tile from "./Tile";
 import { eventBus } from "../GameScripts/EventBus"
+import { use } from "react";
 
 function GameBoard() {
     const GameBoard = useRef(null);
     const [tiles, setTiles] = useState([]);
-    const [tilesSize,] = useState([9, 9]); // TODO: Causes crash if change directly, make a safe way to change by removing elements in state such as dugTileSet.
+    const [tilesSize,] = useState([9, 9]); // TODO RESET EVERYTHING FIRST WHEN DIRECTLY CHANGING THE SIZE DID NOT ADDED DUE TO TEMPORARY USAGE OF RESET GAME
     const [dugTileSet, setDugTileSet] = useState(new Set())
     const [dugTilesEvent, setDugTilesEvent] = useState([]);
     const [flaggedTileEvent, setFlaggedTileEvent] = useState([]);
     const [flaggedTileSet, setFlaggedTileSet] = useState(new Set());
+    const BombUncovered = useRef(false);
+    const BombCount = useRef(10); // TODO: TESTING PURPOSES
 
 
-    // TODO: Auto tile removal must not include flagged tiles
+    // TODO: Make test on reset game
+    // TODO: Win or lose status check if all bomb are flagged
+    // TODO: Leveling system
+    // TODO: DISPLAY WIN OR LOSE STATUS
+    // TODO: MENU
     // TODO: Make tiles adjust properly depending on the size to avoid overflow
     // TODO: Huge bomb?
+    
 
-    // TODO: MORE TEST
-
+    // TODO: SET TIMEOUT IS TEMPORARY ALSO WILL CALL TWICE IF CLICK TILED WITH BOMB
+    const ResetGame = () => {
+        setTimeout(() => {
+            eventBus.emit("ResetEntireData")
+            setDugTileSet(new Set());
+            setDugTilesEvent([]);
+            setFlaggedTileEvent([]);
+            setFlaggedTileSet(new Set());
+            eventBus.emit("GenerateBombs", {amount: BombCount.current});
+        }, 3000);
+        
+    }
+    
     const PreventDefault = (e) => {
         e.preventDefault();
     };
@@ -63,6 +83,8 @@ function GameBoard() {
             const newEvent = eventBus.emit("ReturnNewSpecificProjectionEventIndexOnly", { ProjectionType: "UncoveredTile" });
             setDugTilesEvent(prevEvents => [...prevEvents, newEvent]);
             handleAutomaticallyUncoveredTiles();
+            BombUncovered.current = eventBus.emit("ReturnIsBombUncovered");
+            BombUncovered.current === true ? ResetGame() : null; //TODO: Temporary must display win or lose status first
         }
 
         const UpdateFlagEvents = () => {
@@ -85,7 +107,7 @@ function GameBoard() {
     }, [dugTileSet, tilesSize, flaggedTileSet]);
 
     useEffect(() => {
-        eventBus.emit("GenerateBombs", {amount: 40})
+        eventBus.emit("GenerateBombs", {amount: BombCount.current})
     }, [])
 
     

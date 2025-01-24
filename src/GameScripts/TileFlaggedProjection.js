@@ -1,12 +1,11 @@
 export class TileFlagged_Projection {
     constructor() {
-        this.event = [];
+        this.event = []; //TODO: GET RID OF THIS MAYBE
         this.eventsProjection = new Map();
     }
 
     addEvent({ Event }) {
         
-
         let SpecifiedEvent = {
             index: Event.index,
             isFlagged: this.returnSpecificEventFlaggedStatus({ index: Event.index }),
@@ -20,6 +19,7 @@ export class TileFlagged_Projection {
         this.returnEvents(); // Just for testing ignore this
     }
 
+    // TODO: OPTIMIZE THIS FUNCTION
     returnSpecificEventFlaggedStatus({ index }) {  
         if (this.eventsProjection.has(index)) {
             let value = this.eventsProjection.get(index);
@@ -59,5 +59,12 @@ export class TileFlagged_Projection {
             }
         }
         return returnMap;  
+    }
+
+    clearEvents() {
+        this.eventsProjection = new Map();
+        this.event = [];
+        console.log("CLEARED TILE FLAGGED", this.eventsProjection);
+        console.log("CLEARED TILE FLAGGED ARRAY", this.event);
     }
 }
