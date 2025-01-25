@@ -17,7 +17,7 @@ function GameBoard() {
     const BombCount = useRef(10); // TODO: TESTING PURPOSES
 
 
-    // TODO: Make test on reset game
+
     // TODO: Win or lose status check if all bomb are flagged
     // TODO: Leveling system
     // TODO: DISPLAY WIN OR LOSE STATUS

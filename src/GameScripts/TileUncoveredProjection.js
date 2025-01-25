@@ -30,6 +30,5 @@ export class TileUncovered_Projection {
 
     clearEvents() {
         this.events = [];
-        console.log("CLEARED TILE UNCOVERED", this.events)
     }
 }

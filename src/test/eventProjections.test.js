@@ -1,0 +1,53 @@
+/* eslint-disable no-undef */
+import { eventBus } from '../GameScripts/EventBus';
+
+
+
+describe('Projection', () => {
+   
+
+    test('Check if TileUncoveredProjection successfully resets', () => {
+            eventBus.emit("TilePressed", {index: 1});
+            eventBus.emit("TilePressed", {index: 2});
+            eventBus.emit("TilePressed", {index: 3});
+            eventBus.emit("TilePressed", {index: 4});
+            eventBus.emit("ResetEntireData");
+            const events = eventBus.emit("ReturnSpecificProjectionEvents", {ProjectionType: "UncoveredTile"});
+            console.log("Events: ", events);
+            expect(events).toEqual([]);
+    });
+
+
+    test('Check if TileUncoveredProjection successfully adds events', () => {
+            eventBus.emit("TilePressed", {index: 1});
+            eventBus.emit("TilePressed", {index: 2});
+            eventBus.emit("TilePressed", {index: 3});
+            eventBus.emit("TilePressed", {index: 4});
+            const events = eventBus.emit("ReturnSpecificProjectionEvents", {ProjectionType: "UncoveredTile"});
+            console.log("Events: ", events);
+            expect(events.length).toEqual(4);
+    });
+
+    test('Check if TileFlaggedProjection successfully resets', () => {
+            eventBus.emit("CreateFlagEvent", {index: 1});
+            eventBus.emit("CreateFlagEvent", {index: 2});
+            eventBus.emit("CreateFlagEvent", {index: 3});
+            eventBus.emit("CreateFlagEvent", {index: 4});
+            eventBus.emit("ResetEntireData");
+            const events = eventBus.emit("ReturnSpecificProjectionEvents", {ProjectionType: "FlaggedTile"});
+            console.log("Event: ", events);
+            expect(events).toEqual([]);
+    });
+
+    test('Check if TileFlaggedProjection successfully adds events', () => {
+            eventBus.emit("CreateFlagEvent", {index: 1});
+            eventBus.emit("CreateFlagEvent", {index: 2});
+            eventBus.emit("CreateFlagEvent", {index: 3});
+            eventBus.emit("CreateFlagEvent", {index: 4});
+            const events = eventBus.emit("ReturnSpecificProjectionEvents", {ProjectionType: "FlaggedTile"});
+            console.log("Event: ", events);
+            expect(events.length).toEqual(4);
+    });
+  
+})
+ 

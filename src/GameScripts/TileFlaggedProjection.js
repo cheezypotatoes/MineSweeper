@@ -39,7 +39,7 @@ export class TileFlagged_Projection {
     }
 
     returnEvents() {
-        return this.events;
+        return this.event;
     }
 
     returnLatestEvent() {
@@ -64,7 +64,5 @@ export class TileFlagged_Projection {
     clearEvents() {
         this.eventsProjection = new Map();
         this.event = [];
-        console.log("CLEARED TILE FLAGGED", this.eventsProjection);
-        console.log("CLEARED TILE FLAGGED ARRAY", this.event);
     }
 }
