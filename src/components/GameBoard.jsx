@@ -2,7 +2,7 @@
 import "../assets/css/GameBoard.css"
 import { useEffect, useState, useRef } from "react";
 import Tile from "./Tile";
-import { eventBus } from "../GameScripts/EventBus"
+import { eventBus } from "../GameScripts/EventBus/EventBus"
 import { use } from "react";
 
 function GameBoard() {

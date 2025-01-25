@@ -1,4 +1,4 @@
-import BootStrapList from "../GameScripts/EventBootStrap.js";
+import BootStrapList from "./EventBootStrap";
 
 class EventBus {
     constructor() {

@@ -1,4 +1,4 @@
-import { eventBus } from "./EventBus";
+import { eventBus } from "./EventBus/EventBus";
 class MineSweeperGame {
     constructor() {
         this.height = 0;

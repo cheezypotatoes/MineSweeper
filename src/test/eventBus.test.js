@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { eventBus } from '../GameScripts/EventBus';
+import { eventBus } from '../GameScripts/EventBus/EventBus';
 import { MineSweeper } from '../GameScripts/Game';
 
 

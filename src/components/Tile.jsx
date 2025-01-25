@@ -2,7 +2,7 @@
 import "../assets/css/Tile.css"
 import { useEffect, useRef } from "react"
 
-import { eventBus } from "../GameScripts/EventBus"
+import { eventBus } from "../GameScripts/EventBus/EventBus"
 
 
 function Tile( { index, isFlag, uncovered, UpdateUncoveredEvents, UpdateFlagEvents} ) {
