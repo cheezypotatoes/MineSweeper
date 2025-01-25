@@ -1,5 +1,5 @@
-import { TileUncovered_Projection } from "./TileUncoveredProjection"
-import { TileFlagged_Projection } from "./TileFlaggedProjection";
+import { TileUncovered_Projection } from "./Projections/TileUncoveredProjection"
+import { TileFlagged_Projection } from "./Projections/TileFlaggedProjection";
 
 class ProjectionManagerClass {
     constructor() {

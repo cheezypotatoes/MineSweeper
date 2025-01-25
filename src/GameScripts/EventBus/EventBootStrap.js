@@ -1,6 +1,6 @@
 import { MineSweeper } from "../Game";
-import { EventStore } from "../EventStore";
-import { ProjectionManager } from "../ProjectionManager";
+import { EventStore } from "../EventStore/EventStore";
+import { ProjectionManager } from "../EventStore/ProjectionManager";
 
 const BootStrapList = new Map();
 

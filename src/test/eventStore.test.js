@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { EventStore } from "../GameScripts/EventStore";
+import { EventStore } from "../GameScripts/EventStore/EventStore";
 import { MineSweeper } from "../GameScripts/Game";
 
 describe('EventStore', () => {

@@ -1,4 +1,4 @@
-import { eventBus } from "./EventBus/EventBus";
+import { eventBus } from "../EventBus/EventBus";
 
 class Event_Store {
     constructor() {
