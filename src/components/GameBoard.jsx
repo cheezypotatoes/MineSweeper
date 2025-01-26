@@ -8,7 +8,7 @@ import { use } from "react";
 function GameBoard() {
     const GameBoard = useRef(null);
     const [tiles, setTiles] = useState([]);
-    const [tilesSize,] = useState([9, 9]); // TODO RESET EVERYTHING FIRST WHEN DIRECTLY CHANGING THE SIZE DID NOT ADDED DUE TO TEMPORARY USAGE OF RESET GAME
+    const [tilesSize,] = useState([20, 20]);
     const [dugTileSet, setDugTileSet] = useState(new Set())
     const [dugTilesEvent, setDugTilesEvent] = useState([]);
     const [flaggedTileEvent, setFlaggedTileEvent] = useState([]);
@@ -70,6 +70,8 @@ function GameBoard() {
   
     // Set board size
     useEffect(() => {
+        setTiles([]);
+        ResetGame();
         GameBoard.current.style.gridTemplateColumns = `repeat(${tilesSize[0]}, 1fr)`;
         GameBoard.current.style.gridTemplateRows = `repeat(${tilesSize[1]}, 1fr)`;
         eventBus.emit("SetBoardSize", {height: tilesSize[0], width: tilesSize[1]});
