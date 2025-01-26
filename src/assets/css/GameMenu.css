@@ -1,0 +1,8 @@
+#GameMenuBackground {
+    height: 75vh;
+    width: 40vw;
+    display: none; /* Just preparing */
+    position: absolute;
+    flex-direction: column;
+    background-color: rgb(00, 00, 00, 1);
+}

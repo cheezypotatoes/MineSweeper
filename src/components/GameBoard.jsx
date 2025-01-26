@@ -17,12 +17,11 @@ function GameBoard() {
     const BombCount = useRef(10); // TODO: TESTING PURPOSES
 
 
-
+    // TODO: Make tiles adjust properly depending on the size to avoid overflow (PRIORITIZE)
     // TODO: Win or lose status check if all bomb are flagged
     // TODO: Leveling system
     // TODO: DISPLAY WIN OR LOSE STATUS
     // TODO: MENU
-    // TODO: Make tiles adjust properly depending on the size to avoid overflow
     // TODO: Huge bomb?
     
 

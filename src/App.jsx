@@ -1,5 +1,6 @@
 import './assets/css/App.css'
 import GameBoard from './components/GameBoard'
+import GameMenu from './components/GameMenu'
 
 function App() {
   
@@ -8,6 +9,7 @@ function App() {
     <div id="MainContainer">
         <div id='GameContainer'>
           <GameBoard />
+          <GameMenu />
         </div>
 
         <div id='EventContainer'>
