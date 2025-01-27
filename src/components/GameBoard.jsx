@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import "../assets/css/GameBoard.css"
 import { useEffect, useState, useRef } from "react";
@@ -70,7 +71,6 @@ function GameBoard({ setGameStatus }) {
     // Set board size
     useEffect(() => {
         setTiles([]);
-        ResetGame();
         GameBoard.current.style.gridTemplateColumns = `repeat(${tilesSize[0]}, 1fr)`;
         GameBoard.current.style.gridTemplateRows = `repeat(${tilesSize[1]}, 1fr)`;
         eventBus.emit("SetBoardSize", {height: tilesSize[0], width: tilesSize[1]});

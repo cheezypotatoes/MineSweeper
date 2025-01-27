@@ -151,10 +151,6 @@ class MineSweeperGame {
         return this.bombIndexes;
     }
 
-    returnIsBombUncovered() {
-        return this.BombUncovered;
-    }
-
     returnGameStatus() {
         const FlaggedTilesCount = eventBus.emit("ReturnProjectionSpecialMethod", {ProjectionType: "FlaggedTile", MethodName: "returnEventProjectionSize"});
         return this.BombUncovered? "Lost": this.bombIndexes.size === FlaggedTilesCount? "Win": "Playing";
