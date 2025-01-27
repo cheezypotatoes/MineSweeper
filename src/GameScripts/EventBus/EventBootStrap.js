@@ -60,6 +60,10 @@ const GetAdjacentNumber = ({ index }) => {
     return MineSweeper.getAdjacentNumber({ index: index });
 }
 
+const returnGameStatus = () => {
+    return MineSweeper.returnGameStatus();
+}
+
 // TODO: MAKE TEST FOR THIS FUNCTION
 const ResetEntireData = () => {
     EventStore.clearEvents();
@@ -88,6 +92,8 @@ BootStrapList.set("GetAdjacentNumber", GetAdjacentNumber);
 BootStrapList.set("CreateEventForTilesWithZeroAdjacentCheckQueue", CreateEventForTilesWithZeroAdjacentCheckQueue)
 BootStrapList.set("ResetEntireData", ResetEntireData);
 BootStrapList.set("ReturnIsBombUncovered", ReturnIsBombUncovered);
+BootStrapList.set("returnGameStatus", returnGameStatus);
+
 
 export default BootStrapList;
 

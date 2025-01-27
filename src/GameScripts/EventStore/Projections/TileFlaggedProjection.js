@@ -65,4 +65,8 @@ export class TileFlagged_Projection {
         this.eventsProjection = new Map();
         this.event = [];
     }
+
+    returnEventProjectionSize() {
+        return this.eventsProjection.size;
+    }
 }

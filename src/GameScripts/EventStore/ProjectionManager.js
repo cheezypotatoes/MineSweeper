@@ -10,7 +10,8 @@ class ProjectionManagerClass {
 
         this.projectionSpecialMethods = {
             FlaggedTile: new Map([
-                ["returnProjectionLatestSnapshot", () => this.projections["FlaggedTile"].returnProjectionLatestSnapshot()]
+                ["returnProjectionLatestSnapshot", () => this.projections["FlaggedTile"].returnProjectionLatestSnapshot()],
+                ["returnEventProjectionSize", () => this.projections["FlaggedTile"].returnEventProjectionSize()]
             ])
         };
         

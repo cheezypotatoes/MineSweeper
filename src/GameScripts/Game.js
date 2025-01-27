@@ -7,7 +7,7 @@ class MineSweeperGame {
         this.bombIndexes = new Set() // Stores all index that has a bomb.
         this.adjacentCheckQueue = [] // Queue + Stack on what to check for adjacent number.
         this.checkedTiles = new Set() // Avoids rechecking the tile index (avoids StackOverflow).
-        this.flaggedTiles = new Set() // Stores all index that has a flag.
+        this.flaggedTiles = new Set() // TODO: NOT NEEDED YET MAKE A RETURN AS A SET
         this.BombUncovered = false;
     }
 
@@ -153,6 +153,11 @@ class MineSweeperGame {
 
     returnIsBombUncovered() {
         return this.BombUncovered;
+    }
+
+    returnGameStatus() {
+        const FlaggedTilesCount = eventBus.emit("ReturnProjectionSpecialMethod", {ProjectionType: "FlaggedTile", MethodName: "returnEventProjectionSize"});
+        return this.BombUncovered? "Lost": this.bombIndexes.size === FlaggedTilesCount? "Win": "Playing";
     }
 
     resetGame() {

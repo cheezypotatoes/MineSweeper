@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import "../assets/css/GameBoard.css"
 import { useEffect, useState, useRef } from "react";
@@ -5,19 +6,19 @@ import Tile from "./Tile";
 import { eventBus } from "../GameScripts/EventBus/EventBus"
 import { use } from "react";
 
-function GameBoard() {
+function GameBoard({ setGameStatus }) {
     const GameBoard = useRef(null);
     const [tiles, setTiles] = useState([]);
-    const [tilesSize,] = useState([20, 20]);
+    const [tilesSize,] = useState([10, 10]); // Direct change size when pressing causes crash
     const [dugTileSet, setDugTileSet] = useState(new Set())
     const [dugTilesEvent, setDugTilesEvent] = useState([]);
     const [flaggedTileEvent, setFlaggedTileEvent] = useState([]);
     const [flaggedTileSet, setFlaggedTileSet] = useState(new Set());
     const BombUncovered = useRef(false);
-    const BombCount = useRef(10); // TODO: TESTING PURPOSES
+    const BombCount = useRef(2); // TODO: TESTING PURPOSES
 
 
-    // TODO: Make tiles adjust properly depending on the size to avoid overflow (PRIORITIZE)
+    // TODO: Ability to expand the board and drag to move
     // TODO: Win or lose status check if all bomb are flagged
     // TODO: Leveling system
     // TODO: DISPLAY WIN OR LOSE STATUS
@@ -80,18 +81,24 @@ function GameBoard() {
 
     // If the size, setOfDugTiles Changes, then re-display the tiles on the board
     useEffect(() => {
+        const GameStatusCheck = () => {
+            setGameStatus(eventBus.emit("returnGameStatus"));
+        }
+
+
         const UpdateUncoveredEvents = () => {
             const newEvent = eventBus.emit("ReturnNewSpecificProjectionEventIndexOnly", { ProjectionType: "UncoveredTile" });
             setDugTilesEvent(prevEvents => [...prevEvents, newEvent]);
             handleAutomaticallyUncoveredTiles();
-            BombUncovered.current = eventBus.emit("ReturnIsBombUncovered");
-            BombUncovered.current === true ? ResetGame() : null; //TODO: Temporary must display win or lose status first
+            GameStatusCheck();
+           
         }
 
         const UpdateFlagEvents = () => {
             const newEvent = eventBus.emit("ReturnProjectionSpecialMethod", {ProjectionType: "FlaggedTile", MethodName: "returnProjectionLatestSnapshot"});
             const newArray = Array.from(newEvent, ([key]) => key);
             setFlaggedTileEvent(newArray);
+            GameStatusCheck();
         }
 
         const tilesAmount = tilesSize[1] * tilesSize[0];
@@ -105,7 +112,7 @@ function GameBoard() {
         }
 
         setTiles(tiles)
-    }, [dugTileSet, tilesSize, flaggedTileSet]);
+    }, [dugTileSet, tilesSize, flaggedTileSet, setGameStatus]);
 
     useEffect(() => {
         eventBus.emit("GenerateBombs", {amount: BombCount.current})
