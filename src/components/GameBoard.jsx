@@ -1,10 +1,8 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
 import "../assets/css/GameBoard.css"
 import { useEffect, useState, useRef } from "react";
 import Tile from "./Tile";
 import { eventBus } from "../GameScripts/EventBus/EventBus"
-import { use } from "react";
 
 function GameBoard({ setGameStatus }) {
     const GameBoard = useRef(null);
@@ -14,12 +12,12 @@ function GameBoard({ setGameStatus }) {
     const [dugTilesEvent, setDugTilesEvent] = useState([]);
     const [flaggedTileEvent, setFlaggedTileEvent] = useState([]);
     const [flaggedTileSet, setFlaggedTileSet] = useState(new Set());
-    const BombUncovered = useRef(false);
     const BombCount = useRef(2); // TODO: TESTING PURPOSES
 
 
-    // TODO: Ability to expand the board and drag to move
-    // TODO: Win or lose status check if all bomb are flagged
+    
+    // TODO: Win or lose status check if all bomb are flagged (FINISH IT)
+    // TODO: MOVE ALL useState and useRef to the app.jsx
     // TODO: Leveling system
     // TODO: DISPLAY WIN OR LOSE STATUS
     // TODO: MENU
