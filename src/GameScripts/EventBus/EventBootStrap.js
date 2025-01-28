@@ -44,8 +44,8 @@ const ReturnTileFlaggedLatestProjectionSnapshot = () => {
     return ProjectionManager.returnProjectionLatestSnapshot({ ProjectionType: "FlaggedTile" });
 }
 
-const ReturnProjectionSpecialMethod = ({ ProjectionType, MethodName }) => { 
-    return ProjectionManager.callProjectionSpecialMethod({ ProjectionType: ProjectionType, MethodName: MethodName });
+const ReturnProjectionSpecialMethod = ({ ProjectionType, MethodName, Data }) => { 
+    return ProjectionManager.callProjectionSpecialMethod({ ProjectionType: ProjectionType, MethodName: MethodName, Data: Data });
 }
 
 const GenerateBombs = ({ amount }) => {

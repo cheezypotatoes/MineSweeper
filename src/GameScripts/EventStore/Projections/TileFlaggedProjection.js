@@ -61,12 +61,46 @@ export class TileFlagged_Projection {
         return returnMap;  
     }
 
+    // TODO: CLEAN
+    returnProjectionLatestSnapshotAsArray() {
+        const map = this.returnProjectionLatestSnapshot();
+        const newArray = Array.from(map, ([key]) => key);
+        return newArray;
+    }
+
     clearEvents() {
         this.eventsProjection = new Map();
         this.event = [];
     }
 
     returnEventProjectionSize() {
-        return this.eventsProjection.size;
+        let count = 0
+
+        for (const [,value] of this.eventsProjection) { 
+            if (value === true) {
+                count += 1;
+            }
+        }
+        return count;
+    }
+
+    checkFlaggedStatus({ index }) {
+        if (this.eventsProjection.has(index)) {
+            return this.eventsProjection.get(index);
+        } else {
+            return false;
+        }
+    }
+
+    unflagTileDueToAutomaticRemoval({ index }) {
+        if (this.eventsProjection.has(index)) {
+            this.eventsProjection.set(index, false);
+        }
+    }
+
+    ifIndexIsFlaggedTrueThenUnflag({ Data }) {
+        if (this.eventsProjection.has(Data.index)) {
+            this.eventsProjection.set(Data.index, false);
+        }
     }
 }

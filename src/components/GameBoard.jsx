@@ -11,7 +11,7 @@ function GameBoard({ setGameStatus }) {
     const [tilesSize,] = useState([10, 10]); // Direct change size when pressing causes crash
     const [dugTileSet, setDugTileSet] = useState(new Set())
     const [dugTilesEvent, setDugTilesEvent] = useState([]);
-    const [flaggedTileEvent, setFlaggedTileEvent] = useState([]);
+    const [flaggedTileEvent, setFlaggedTileEvent] = useState([]); // TODO: CHANGE ITS WAY OF RENDERING I GUESS
     const [flaggedTileSet, setFlaggedTileSet] = useState(new Set());
     const BombCount = useRef(2); // TODO: TESTING PURPOSES
 
@@ -64,7 +64,7 @@ function GameBoard({ setGameStatus }) {
 
     // Change flagged tiles event if the event changes
     useEffect(() => {  
-        setFlaggedTileSet(new Set(flaggedTileEvent))    
+        setFlaggedTileSet(new Set(eventBus.emit("ReturnProjectionSpecialMethod", {ProjectionType: "FlaggedTile", MethodName: "returnProjectionLatestSnapshotAsArray"})))    
     }, [flaggedTileEvent])
 
   

@@ -13,8 +13,8 @@ function Tile( { index, isFlag, uncovered, UpdateUncoveredEvents, UpdateFlagEven
         if (uncovered || isFlag) {return}
         if (e.type === "click") {
             eventBus.emit("TilePressed", {index: Index.current})
-            UpdateUncoveredEvents();
             eventBus.emit("CreateEventForTilesWithZeroAdjacentCheckQueue");
+            UpdateUncoveredEvents();
         } else if (e.type === 'contextmenu') {
             e.preventDefault();
             eventBus.emit("CreateFlagEvent", {index: Index.current});

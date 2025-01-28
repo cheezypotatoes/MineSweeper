@@ -9,9 +9,12 @@ class ProjectionManagerClass {
         }
 
         this.projectionSpecialMethods = {
+            // TODO: DEAL SOMETHING IF YOU WANT TO ADD ARGUMENTS
             FlaggedTile: new Map([
                 ["returnProjectionLatestSnapshot", () => this.projections["FlaggedTile"].returnProjectionLatestSnapshot()],
-                ["returnEventProjectionSize", () => this.projections["FlaggedTile"].returnEventProjectionSize()]
+                ["returnEventProjectionSize", () => this.projections["FlaggedTile"].returnEventProjectionSize()],
+                ["returnProjectionLatestSnapshotAsArray", () => this.projections["FlaggedTile"].returnProjectionLatestSnapshotAsArray()],
+                ["ifIndexIsFlaggedTrueThenUnflag", (Data) => this.projections["FlaggedTile"].ifIndexIsFlaggedTrueThenUnflag({ Data: Data })],
             ])
         };
         
@@ -36,8 +39,8 @@ class ProjectionManagerClass {
     }
 
     
-    callProjectionSpecialMethod({ ProjectionType, MethodName }) { 
-        return this.projectionSpecialMethods[ProjectionType].get(MethodName)();     
+    callProjectionSpecialMethod({ ProjectionType, MethodName, Data = {} }) { 
+        return this.projectionSpecialMethods[ProjectionType].get(MethodName)(Data);     
     }
 
     clearEvents() {
