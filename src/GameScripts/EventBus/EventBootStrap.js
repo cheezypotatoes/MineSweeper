@@ -64,7 +64,6 @@ const returnGameStatus = () => {
     return MineSweeper.returnGameStatus();
 }
 
-// TODO: MAKE TEST FOR THIS FUNCTION
 const ResetEntireData = () => {
     EventStore.clearEvents();
     ProjectionManager.clearEvents();

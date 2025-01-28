@@ -7,7 +7,6 @@ class MineSweeperGame {
         this.bombIndexes = new Set() // Stores all index that has a bomb.
         this.adjacentCheckQueue = [] // Queue + Stack on what to check for adjacent number.
         this.checkedTiles = new Set() // Avoids rechecking the tile index (avoids StackOverflow).
-        this.flaggedTiles = new Set() // TODO: NOT NEEDED YET MAKE A RETURN AS A SET
         this.BombUncovered = false;
         this.tileUncoveredAmount = 0;
     }
@@ -163,17 +162,16 @@ class MineSweeperGame {
         const requiredTileToUncovered = tilesNeedToUncovered === this.tileUncoveredAmount? true : false;
         // If all tiles required to be flagged is equal to the amount of tiles that are flagged then return true.
         // TODO: Might not be needed since the game will end if all tiles are uncovered.
-        // TODO: Make tiles flag status false if automatically gets uncovered
         const tileNeedToBeFlagged = tilesNeedToUncovered + flaggedTilesAmount === this.tileAmount? true : false; 
         const IfWin = (requiredTileToUncovered && tileNeedToBeFlagged) ? true : false;
         return this.BombUncovered? "Lost": IfWin? "Win": "Playing";
     }
 
+    // TODO: Make an array of functions that will be called when the game is reset.
     resetGame() {
         this.bombIndexes = new Set();
         this.adjacentCheckQueue = [];
         this.checkedTiles = new Set();
-        this.flaggedTiles = new Set();
         this.BombUncovered = false;
         this.tileUncoveredAmount = 0;
     }

@@ -9,7 +9,6 @@ class ProjectionManagerClass {
         }
 
         this.projectionSpecialMethods = {
-            // TODO: DEAL SOMETHING IF YOU WANT TO ADD ARGUMENTS
             FlaggedTile: new Map([
                 ["returnProjectionLatestSnapshot", () => this.projections["FlaggedTile"].returnProjectionLatestSnapshot()],
                 ["returnEventProjectionSize", () => this.projections["FlaggedTile"].returnEventProjectionSize()],
