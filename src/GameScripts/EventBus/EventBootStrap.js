@@ -28,10 +28,6 @@ const ApplyEventToProjectionManager = ({ Event }) => {
     ProjectionManager.applyEvents({ Event: Event });
 }
 
-const ReturnSpecificProjectionEvents = ({ ProjectionType }) => {
-    return ProjectionManager.returnSpecificProjectionEvent({ ProjectionType:ProjectionType });
-};
-
 const ReturnNewSpecificProjectionEvent = ({ ProjectionType }) => {
     return ProjectionManager.returnNewSpecificProjectionEvent({ ProjectionType:ProjectionType });
 };
@@ -76,7 +72,6 @@ BootStrapList.set("CreateFlagEvent", CreateFlagEvent);
 BootStrapList.set("SetBoardSize", SetBoardSize);
 BootStrapList.set("SendTileUncoveredEventToEventStore", SendTileUncoveredEventToEventStore);
 BootStrapList.set("ApplyEventToProjectionManager", ApplyEventToProjectionManager);
-BootStrapList.set("ReturnSpecificProjectionEvents", ReturnSpecificProjectionEvents);
 BootStrapList.set("ReturnNewSpecificProjectionEvent", ReturnNewSpecificProjectionEvent);
 BootStrapList.set("ReturnNewSpecificProjectionEventIndexOnly", ReturnNewSpecificProjectionEventIndexOnly);
 BootStrapList.set("ReturnTileFlaggedLatestProjectionSnapshot", ReturnTileFlaggedLatestProjectionSnapshot);

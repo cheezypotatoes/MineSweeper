@@ -1,6 +1,5 @@
 export class TileFlagged_Projection {
     constructor() {
-        this.event = []; //TODO: GET RID OF THIS MAYBE
         this.eventsProjection = new Map();
     }
 
@@ -13,8 +12,6 @@ export class TileFlagged_Projection {
 
         // Hashmap projection
         this.eventsProjection.set(SpecifiedEvent.index, SpecifiedEvent.isFlagged);
-        
-        this.event.push(SpecifiedEvent);
        
         this.returnEvents(); // Just for testing ignore this
     }
@@ -40,14 +37,6 @@ export class TileFlagged_Projection {
 
     returnEvents() {
         return this.event;
-    }
-
-    returnLatestEvent() {
-        return this.events[this.events.length - 1];
-    }
-
-    returnLatestEventIndexOnly() {
-        return this.events[this.events.length - 1].index;
     }
 
     // Only returns all true values should change function name later

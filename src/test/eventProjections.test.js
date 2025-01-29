@@ -12,7 +12,8 @@ describe('Projection', () => {
             eventBus.emit("TilePressed", {index: 3});
             eventBus.emit("TilePressed", {index: 4});
             eventBus.emit("ResetEntireData");
-            const events = eventBus.emit("ReturnSpecificProjectionEvents", {ProjectionType: "UncoveredTile"});
+            const events = eventBus.emit("ReturnProjectionSpecialMethod", {ProjectionType: "UncoveredTile", MethodName: "returnEvents"});
+        
             console.log("Events: ", events);
             expect(events).toEqual([]);
     });
@@ -23,7 +24,7 @@ describe('Projection', () => {
             eventBus.emit("TilePressed", {index: 2});
             eventBus.emit("TilePressed", {index: 3});
             eventBus.emit("TilePressed", {index: 4});
-            const events = eventBus.emit("ReturnSpecificProjectionEvents", {ProjectionType: "UncoveredTile"});
+            const events = eventBus.emit("ReturnProjectionSpecialMethod", {ProjectionType: "UncoveredTile", MethodName: "returnEvents"});
             console.log("Events: ", events);
             expect(events.length).toEqual(4);
     });
@@ -34,20 +35,23 @@ describe('Projection', () => {
             eventBus.emit("CreateFlagEvent", {index: 3});
             eventBus.emit("CreateFlagEvent", {index: 4});
             eventBus.emit("ResetEntireData");
-            const events = eventBus.emit("ReturnSpecificProjectionEvents", {ProjectionType: "FlaggedTile"});
-            console.log("Event: ", events);
-            expect(events).toEqual([]);
+            const size = eventBus.emit("ReturnProjectionSpecialMethod", {ProjectionType: "FlaggedTile", MethodName: "returnEventProjectionSize"});
+
+            console.log("Size: ", size);
+            expect(size).toEqual(0);
     });
 
     test('Check if TileFlaggedProjection successfully adds events', () => {
-            eventBus.emit("CreateFlagEvent", {index: 1});
-            eventBus.emit("CreateFlagEvent", {index: 2});
-            eventBus.emit("CreateFlagEvent", {index: 3});
-            eventBus.emit("CreateFlagEvent", {index: 4});
-            const events = eventBus.emit("ReturnSpecificProjectionEvents", {ProjectionType: "FlaggedTile"});
-            console.log("Event: ", events);
-            expect(events.length).toEqual(4);
-    });
-  
+        eventBus.emit("CreateFlagEvent", {index: 1});
+        eventBus.emit("CreateFlagEvent", {index: 2});
+        eventBus.emit("CreateFlagEvent", {index: 3});
+        eventBus.emit("CreateFlagEvent", {index: 4});
+        const size = eventBus.emit("ReturnProjectionSpecialMethod", {ProjectionType: "FlaggedTile", MethodName: "returnEventProjectionSize"});
+        console.log("Size: ", size);
+        expect(size).toEqual(4);
+});
+
+
+    
 })
  

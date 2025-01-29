@@ -43,7 +43,7 @@ function GameBoard({ setGameStatus }) {
     };
 
     const handleAutomaticallyUncoveredTiles = () => {
-        const event = eventBus.emit("ReturnSpecificProjectionEvents", {ProjectionType: "UncoveredTile"})
+        const event = eventBus.emit("ReturnProjectionSpecialMethod", {ProjectionType: "UncoveredTile", MethodName: "returnEvents"});
         setDugTileSet((prevSet) => {
             const updatedSet = new Set(prevSet);
             for (const tile of event) {
