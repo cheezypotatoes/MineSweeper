@@ -16,7 +16,8 @@ class ProjectionManagerClass {
                 ["ifIndexIsFlaggedTrueThenUnflag", (Data) => this.projections["FlaggedTile"].ifIndexIsFlaggedTrueThenUnflag({ Data: Data })],
             ]),
             UncoveredTile: new Map([
-                ["returnEvents", () => this.projections["UncoveredTile"].returnEvents()]
+                ["returnEvents", () => this.projections["UncoveredTile"].returnEvents()],
+                ["returnLatestEventIndexOnly", () => {this.projections["UncoveredTile"].returnLatestEventIndexOnly()}]
             ])
         };
         
@@ -27,14 +28,6 @@ class ProjectionManagerClass {
         let projectionMatched = this.projections[Event.type];
         projectionMatched.addEvent({ Event: Event })
     } 
-
-    returnNewSpecificProjectionEvent({ ProjectionType }) {
-        return this.projections[ProjectionType].returnLatestEvent();
-    }
-
-    returnNewSpecificProjectionEventIndexOnly ({ ProjectionType }) {
-        return this.projections[ProjectionType].returnLatestEventIndexOnly();
-    }
 
     
     callProjectionSpecialMethod({ ProjectionType, MethodName, Data = {} }) { 

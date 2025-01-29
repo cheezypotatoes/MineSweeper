@@ -85,7 +85,7 @@ function GameBoard({ setGameStatus }) {
 
 
         const UpdateUncoveredEvents = () => {
-            const newEvent = eventBus.emit("ReturnNewSpecificProjectionEventIndexOnly", { ProjectionType: "UncoveredTile" });
+            const newEvent = eventBus.emit("ReturnProjectionSpecialMethod", {ProjectionType: "UncoveredTile", MethodName: "returnLatestEventIndexOnly"});
             setDugTilesEvent(prevEvents => [...prevEvents, newEvent]);
             handleAutomaticallyUncoveredTiles();
             GameStatusCheck();

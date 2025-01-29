@@ -28,18 +28,6 @@ const ApplyEventToProjectionManager = ({ Event }) => {
     ProjectionManager.applyEvents({ Event: Event });
 }
 
-const ReturnNewSpecificProjectionEvent = ({ ProjectionType }) => {
-    return ProjectionManager.returnNewSpecificProjectionEvent({ ProjectionType:ProjectionType });
-};
-
-const ReturnNewSpecificProjectionEventIndexOnly = ({ ProjectionType }) => {
-    return ProjectionManager.returnNewSpecificProjectionEventIndexOnly({ ProjectionType:ProjectionType });
-};
-
-const ReturnTileFlaggedLatestProjectionSnapshot = () => { 
-    return ProjectionManager.returnProjectionLatestSnapshot({ ProjectionType: "FlaggedTile" });
-}
-
 const ReturnProjectionSpecialMethod = ({ ProjectionType, MethodName, Data }) => { 
     return ProjectionManager.callProjectionSpecialMethod({ ProjectionType: ProjectionType, MethodName: MethodName, Data: Data });
 }
@@ -72,9 +60,6 @@ BootStrapList.set("CreateFlagEvent", CreateFlagEvent);
 BootStrapList.set("SetBoardSize", SetBoardSize);
 BootStrapList.set("SendTileUncoveredEventToEventStore", SendTileUncoveredEventToEventStore);
 BootStrapList.set("ApplyEventToProjectionManager", ApplyEventToProjectionManager);
-BootStrapList.set("ReturnNewSpecificProjectionEvent", ReturnNewSpecificProjectionEvent);
-BootStrapList.set("ReturnNewSpecificProjectionEventIndexOnly", ReturnNewSpecificProjectionEventIndexOnly);
-BootStrapList.set("ReturnTileFlaggedLatestProjectionSnapshot", ReturnTileFlaggedLatestProjectionSnapshot);
 BootStrapList.set("ReturnProjectionSpecialMethod", ReturnProjectionSpecialMethod);
 BootStrapList.set("GenerateBombs", GenerateBombs);
 BootStrapList.set("CheckIfIndexIsBomb", CheckIfIndexIsBomb);
