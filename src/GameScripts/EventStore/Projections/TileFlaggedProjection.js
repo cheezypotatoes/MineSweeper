@@ -16,25 +16,15 @@ export class TileFlagged_Projection {
         this.returnEvents(); // Just for testing ignore this
     }
 
-    // TODO: OPTIMIZE THIS FUNCTION
     returnSpecificEventFlaggedStatus({ index }) {  
-        if (this.eventsProjection.has(index)) {
-            let value = this.eventsProjection.get(index);
-            
-            if (value === true) {
-                this.eventsProjection.set(index, false);
-                return false;
-            } else {
-                this.eventsProjection.set(index, true);
-                return true;
-            }
-            
-        } else {
-            return true;
-        }
+        if (!this.eventsProjection.has(index)) return true;
         
+        let value = !this.eventsProjection.get(index);
+        this.eventsProjection.set(index, value);
+        
+        return value;
     }
-
+    
     returnEvents() {
         return this.event;
     }
@@ -50,11 +40,10 @@ export class TileFlagged_Projection {
         return returnMap;  
     }
 
-    // TODO: CLEAN
     returnProjectionLatestSnapshotAsArray() {
-        const map = this.returnProjectionLatestSnapshot();
-        const newArray = Array.from(map, ([key]) => key);
-        return newArray;
+        const ProjectionSnapshot = this.returnProjectionLatestSnapshot();
+        const ProjectionSnapshotAsArray = Array.from(ProjectionSnapshot, ([key]) => key);
+        return ProjectionSnapshotAsArray;
     }
 
     clearEvents() {
