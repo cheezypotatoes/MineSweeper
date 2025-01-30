@@ -34,16 +34,6 @@ function GameBoard(
         e.preventDefault();
     };
 
-    const handleAutomaticallyUncoveredTiles = () => {
-        const event = eventBus.emit("ReturnProjectionSpecialMethod", {ProjectionType: "UncoveredTile", MethodName: "returnEvents"});
-        setDugTileSet((prevSet) => {
-            const updatedSet = new Set(prevSet);
-            for (const tile of event) {
-                updatedSet.add(tile.index);
-            }
-            return updatedSet;
-          });
-    }
 
 
     // Change dug tiles event if the event changes
@@ -71,10 +61,20 @@ function GameBoard(
 
     // If the size, setOfDugTiles Changes, then re-display the tiles on the board
     useEffect(() => {
+        const handleAutomaticallyUncoveredTiles = () => {
+            const event = eventBus.emit("ReturnProjectionSpecialMethod", {ProjectionType: "UncoveredTile", MethodName: "returnEvents"});
+            setDugTileSet((prevSet) => {
+                const updatedSet = new Set(prevSet);
+                for (const tile of event) {
+                    updatedSet.add(tile.index);
+                }
+                return updatedSet;
+              });
+        }
+
         const GameStatusCheck = () => {
             setGameStatus(eventBus.emit("returnGameStatus"));
         }
-
 
         const UpdateUncoveredEvents = () => {
             const newEvent = eventBus.emit("ReturnProjectionSpecialMethod", {ProjectionType: "UncoveredTile", MethodName: "returnLatestEventIndexOnly"});
@@ -103,9 +103,8 @@ function GameBoard(
 
         setTiles(tiles)
     }, [dugTileSet, tilesSize, flaggedTileSet, 
-        setGameStatus, handleAutomaticallyUncoveredTiles, 
-        setDugTileSet, setDugTilesEvent, setFlaggedTileEvent, 
-        setTiles]);
+        setGameStatus, setDugTileSet, setDugTilesEvent, 
+        setFlaggedTileEvent, setTiles]);
 
     useEffect(() => {
         eventBus.emit("GenerateBombs", {amount: BombCount.current})
