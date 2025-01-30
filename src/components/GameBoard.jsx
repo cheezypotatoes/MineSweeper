@@ -52,12 +52,12 @@ function GameBoard(
         if (latestEvent === undefined) {return;}
         let latestEventIndex = latestEvent;
         setDugTileSet(prevSet => new Set(prevSet).add(latestEventIndex));
-    }, [dugTilesEvent]);
+    }, [dugTilesEvent, setDugTileSet]);
 
     // Change flagged tiles event if the event changes
     useEffect(() => {  
         setFlaggedTileSet(new Set(eventBus.emit("ReturnProjectionSpecialMethod", {ProjectionType: "FlaggedTile", MethodName: "returnProjectionLatestSnapshotAsArray"})))    
-    }, [flaggedTileEvent])
+    }, [flaggedTileEvent, setFlaggedTileSet])
 
   
     // Set board size
@@ -66,7 +66,7 @@ function GameBoard(
         GameBoard.current.style.gridTemplateColumns = `repeat(${tilesSize[0]}, 1fr)`;
         GameBoard.current.style.gridTemplateRows = `repeat(${tilesSize[1]}, 1fr)`;
         eventBus.emit("SetBoardSize", {height: tilesSize[0], width: tilesSize[1]});
-    }, [tilesSize])
+    }, [tilesSize, setTiles])
 
 
     // If the size, setOfDugTiles Changes, then re-display the tiles on the board
