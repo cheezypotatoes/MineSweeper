@@ -5,21 +5,13 @@ import { useEffect, useState, useRef } from "react";
 import Tile from "./Tile";
 import { eventBus } from "../GameScripts/EventBus/EventBus"
 
-function GameBoard({ setGameStatus }) {
+function GameBoard(
+    { BombCount, setGameStatus, tiles, setTiles, tilesSize, dugTileSet, 
+    setDugTileSet, dugTilesEvent, setDugTilesEvent, flaggedTileEvent,
+    setFlaggedTileEvent, flaggedTileSet, setFlaggedTileSet}) {
     const GameBoard = useRef(null);
-    const [tiles, setTiles] = useState([]);
-    const [tilesSize,] = useState([10, 10]); // Direct change size when pressing causes crash
-    // TODO: Uses array to force trigger a re-rendering, make it so that it not need an array
-    const [dugTileSet, setDugTileSet] = useState(new Set())
-    const [dugTilesEvent, setDugTilesEvent] = useState([]);
-    const [flaggedTileEvent, setFlaggedTileEvent] = useState([]);
-    const [flaggedTileSet, setFlaggedTileSet] = useState(new Set());
-    const BombCount = useRef(2); // TODO: TESTING PURPOSES
 
-
-    
-    // TODO: Win or lose status check if all bomb are flagged (FINISH IT)
-    // TODO: MOVE ALL useState and useRef to the app.jsx
+    // TODO: Starting menu
     // TODO: Level change system
     // TODO: MENU
     // TODO: Huge bomb?
