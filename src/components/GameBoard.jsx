@@ -102,11 +102,14 @@ function GameBoard(
         }
 
         setTiles(tiles)
-    }, [dugTileSet, tilesSize, flaggedTileSet, setGameStatus]);
+    }, [dugTileSet, tilesSize, flaggedTileSet, 
+        setGameStatus, handleAutomaticallyUncoveredTiles, 
+        setDugTileSet, setDugTilesEvent, setFlaggedTileEvent, 
+        setTiles]);
 
     useEffect(() => {
         eventBus.emit("GenerateBombs", {amount: BombCount.current})
-    }, [])
+    }, [BombCount])
 
     
     return (
