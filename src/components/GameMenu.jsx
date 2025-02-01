@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import '../assets/css/GameMenu.css'
 
-export default function GameMenu({gameStatus}) {
+export default function GameMenu({gameStatus, ResetGame}) {
   const [showMenu, setShowMenu] = useState(false);
   const [status, setStatus] = useState([]);
   const [gameStatusMap,] = useState({
@@ -17,7 +17,7 @@ export default function GameMenu({gameStatus}) {
       const GameCurrentStatus = [
         <h1 key="title" className="GameStatusComponent" id='ResultText'>{gameStatusMap[gameStatus]}</h1>,
         <div key="GameButtons"  className="GameStatusComponent" id='GameButtons'>
-          <div className='GameMenuButton' >RESTART</div>
+          <div className='GameMenuButton' onClick={() => {ResetGame(); setShowMenu(false);}}>RESTART</div>
           <div className='GameMenuButton' >MENU</div>
         </div>
       ];
@@ -31,7 +31,7 @@ export default function GameMenu({gameStatus}) {
       setShowMenu(true);
     }
     
-  }, [gameStatus, gameStatusMap]);
+  }, [gameStatus, gameStatusMap, ResetGame]);
 
 
 

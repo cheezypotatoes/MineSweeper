@@ -1,5 +1,6 @@
 import './assets/css/App.css'
-import { useState, useRef } from 'react'
+import { useState, useRef, useCallback } from 'react'
+import { eventBus } from './GameScripts/EventBus/EventBus'
 import GameBoard from './components/GameBoard'
 import GameMenu from './components/GameMenu'
 
@@ -12,7 +13,17 @@ function App() {
   const [dugTilesEvent, setDugTilesEvent] = useState([]);
   const [flaggedTileEvent, setFlaggedTileEvent] = useState([]);
   const [flaggedTileSet, setFlaggedTileSet] = useState(new Set());
-  const BombCount = useRef(2); // TODO: TESTING PURPOSES
+  const BombCount = useRef(10); // TODO: TESTING PURPOSES
+
+  const ResetGame = useCallback(() => {
+    eventBus.emit("ResetEntireData")
+    setDugTileSet(new Set());
+    setDugTilesEvent([]);
+    setFlaggedTileEvent([]);
+    setFlaggedTileSet(new Set());
+    eventBus.emit("GenerateBombs", {amount: BombCount.current});
+  }, [])
+    
 
   return (
     <div id="MainContainer">
@@ -22,7 +33,7 @@ function App() {
            setTiles={setTiles} tilesSize={tilesSize}  dugTilesEvent={dugTilesEvent} setDugTilesEvent={setDugTilesEvent}
            flaggedTileEvent={flaggedTileEvent} setFlaggedTileEvent={setFlaggedTileEvent} flaggedTileSet={flaggedTileSet} 
            setFlaggedTileSet={setFlaggedTileSet} BombCount={BombCount}/>
-          <GameMenu gameStatus={gameStatus}/>
+          <GameMenu gameStatus={gameStatus} ResetGame={ResetGame}/>
         </div>
 
         <div id='EventContainer'>

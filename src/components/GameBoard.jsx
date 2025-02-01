@@ -16,19 +16,6 @@ function GameBoard(
     // TODO: MENU
     // TODO: Huge bomb?
     
-
-    // TODO: SET TIMEOUT IS TEMPORARY ALSO WILL CALL TWICE IF CLICK TILED WITH BOMB
-    const ResetGame = () => {
-        setTimeout(() => {
-            eventBus.emit("ResetEntireData")
-            setDugTileSet(new Set());
-            setDugTilesEvent([]);
-            setFlaggedTileEvent([]);
-            setFlaggedTileSet(new Set());
-            eventBus.emit("GenerateBombs", {amount: BombCount.current});
-        }, 3000);
-        
-    }
     
     const PreventDefault = (e) => {
         e.preventDefault();
