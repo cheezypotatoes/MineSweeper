@@ -3,10 +3,63 @@
     width: 40vw;
     display: none;
     position: absolute;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
     background-color: rgba(128, 128, 128, 0.9);
 }
 
-#GameStatusText {
+.GameStatusComponent {
+    position: relative;
     text-align: center;
+    
 }
+
+#ResultText {
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3vw;
+}
+
+#GameButtons {
+    height: 25vh;
+    width: 30vw;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    padding-left: 1vw;
+    padding-right: 1vw;
+}
+
+.GameMenuButton {
+    display: block;
+    border-top: 0.5vw solid rgb(241, 241, 241);
+    border-left: 0.5vw solid rgb(241, 241, 241);
+    border-right: 0.5vw solid rgb(46, 46, 46);
+    border-bottom: 0.5vw solid rgb(92, 92, 92);
+    align-self: center;
+    justify-self: center;
+    width: 10vw;
+    font-size: 2vw;
+    user-select: none;
+    cursor: pointer;
+}
+
+.GameMenuButton:hover {
+    border-top: 0.3vw solid rgb(241, 241, 241);
+    border-left: 0.3vw solid rgb(241, 241, 241);
+    border-right: 0.5vw solid rgb(46, 46, 46);
+    border-bottom: 0.5vw solid rgb(92, 92, 92);
+}
+
+.GameMenuButton:active {
+    border-top: 0.1vw solid rgb(241, 241, 241);
+    border-left: 0.1vw solid rgb(241, 241, 241);
+    border-right: 0.6vw solid rgb(46, 46, 46);
+    border-bottom: 0.6vw solid rgb(92, 92, 92);
+}
+

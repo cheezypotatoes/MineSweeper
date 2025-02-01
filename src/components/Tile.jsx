@@ -42,7 +42,8 @@ function Tile( { index, isFlag, uncovered, UpdateUncoveredEvents, UpdateFlagEven
     useEffect(() => {
         if (uncovered) {
             let isBomb = eventBus.emit("CheckIfIndexIsBomb", {index: index});
-            TileStatus.current.textContent = isBomb ? "💣" : eventBus.emit("GetAdjacentNumber", {index: index});
+            const adjacentNumber = eventBus.emit("GetAdjacentNumber", {index: index});
+            TileStatus.current.textContent = isBomb ? "💣" : adjacentNumber === 0? "": adjacentNumber;
         } else {
             TileStatus.current.textContent = isFlag ? "🚩" : "";
         }

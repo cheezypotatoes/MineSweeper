@@ -4,18 +4,40 @@ import '../assets/css/GameMenu.css'
 
 export default function GameMenu({gameStatus}) {
   const [showMenu, setShowMenu] = useState(false);
+  const [status, setStatus] = useState([]);
+  const [gameStatusMap,] = useState({
+    Lost: "YOU LOST!",
+    Win: "YOU WON!",
+  })
+
+  
+  
   useEffect(() => {
-    if (gameStatus === "Win") {
+    const WinOrLoseStatus = () => {
+      const GameCurrentStatus = [
+        <h1 key="title" className="GameStatusComponent" id='ResultText'>{gameStatusMap[gameStatus]}</h1>,
+        <div key="GameButtons"  className="GameStatusComponent" id='GameButtons'>
+          <div className='GameMenuButton' >RESTART</div>
+          <div className='GameMenuButton' >MENU</div>
+        </div>
+      ];
+      setStatus(GameCurrentStatus);
+    }
+
+
+    WinOrLoseStatus();
+
+    if (gameStatus !== "Playing") {
       setShowMenu(true);
-    } else if (gameStatus === "Lost") {
-      setShowMenu(true);}
-  }, [gameStatus]);
+    }
+    
+  }, [gameStatus, gameStatusMap]);
+
 
 
   return (
     <div id='GameMenuBackground' style={{display: showMenu ? "block" : "none"}}>
-      <h1 id='GameStatusText'>Game Status</h1>
-      <h2 id='GameStatusText'>{gameStatus}</h2>
+      {status}
     </div>
   );
 }
