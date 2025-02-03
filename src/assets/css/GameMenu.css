@@ -9,6 +9,8 @@
     background-color: rgba(128, 128, 128, 0.9);
 }
 
+
+
 .GameStatusComponent {
     position: relative;
     text-align: center;
@@ -33,6 +35,37 @@
     grid-template-rows: 1fr;
     padding-left: 1vw;
     padding-right: 1vw;
+}
+
+#GameButtonsLevelPicker {
+    height: 25vh;
+    width: 30vw;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+    padding-left: 1vw;
+    padding-right: 1vw;
+}
+
+#LevelText {
+    position: relative;
+    text-align: center;
+    font-size: 3vw;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#StartButton {
+    position: absolute;
+    text-align: center;
+    font-size: 3vw;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .GameMenuButton {

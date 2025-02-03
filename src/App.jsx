@@ -1,5 +1,5 @@
 import './assets/css/App.css'
-import { useState, useRef, useCallback } from 'react'
+import { useState, useRef, useCallback, useEffect } from 'react'
 import { eventBus } from './GameScripts/EventBus/EventBus'
 import GameBoard from './components/GameBoard'
 import GameMenu from './components/GameMenu'
@@ -13,6 +13,7 @@ function App() {
   const [dugTilesEvent, setDugTilesEvent] = useState([]);
   const [flaggedTileEvent, setFlaggedTileEvent] = useState([]);
   const [flaggedTileSet, setFlaggedTileSet] = useState(new Set());
+  const [difficultyLevel, setDifficultyLevel] = useState(1);
   const BombCount = useRef(10); // TODO: TESTING PURPOSES
 
   const ResetGame = useCallback(() => {
@@ -23,6 +24,14 @@ function App() {
     setFlaggedTileSet(new Set());
     eventBus.emit("GenerateBombs", {amount: BombCount.current});
   }, [])
+
+  useEffect(() => {
+    console.log(difficultyLevel)
+  }, [difficultyLevel])
+
+  const ChangeDifficulty = ({add}) => {
+    setDifficultyLevel(prevCount => prevCount + add);
+  }
     
 
   return (
@@ -33,7 +42,9 @@ function App() {
            setTiles={setTiles} tilesSize={tilesSize}  dugTilesEvent={dugTilesEvent} setDugTilesEvent={setDugTilesEvent}
            flaggedTileEvent={flaggedTileEvent} setFlaggedTileEvent={setFlaggedTileEvent} flaggedTileSet={flaggedTileSet} 
            setFlaggedTileSet={setFlaggedTileSet} BombCount={BombCount}/>
-          <GameMenu gameStatus={gameStatus} ResetGame={ResetGame}/>
+
+          <GameMenu gameStatus={gameStatus} setGameStatus={setGameStatus} ResetGame={ResetGame}
+          difficultyLevel={difficultyLevel} ChangeDifficulty={ChangeDifficulty}/>
         </div>
 
         <div id='EventContainer'>

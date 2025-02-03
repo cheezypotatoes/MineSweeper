@@ -15,6 +15,7 @@ function GameBoard(
     // TODO: Level change system
     // TODO: MENU
     // TODO: Huge bomb?
+    // TODO: Get rid of anything around it if specific all adjacent number are flagged around
     
     
     const PreventDefault = (e) => {
