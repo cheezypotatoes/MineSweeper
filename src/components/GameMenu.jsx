@@ -1,11 +1,17 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useMemo  } from 'react';
 import '../assets/css/GameMenu.css'
 
 export default function GameMenu({gameStatus, setGameStatus, ResetGame, difficultyLevel, ChangeDifficulty}) {
   const [showMenu, setShowMenu] = useState(false);
   const [status, setStatus] = useState([]);
   const levelHeader = useRef(null);
+  const levelType = useMemo(
+    () => ({ 1: "Beginner", 2: "Intermediate", 3: "Expert" }),
+    []
+  )
+
+
   const [gameStatusMap,] = useState({
     Lost: [
       <h1 key="title" className="GameStatusComponent" id='ResultText'>You Lost</h1>,
@@ -25,10 +31,10 @@ export default function GameMenu({gameStatus, setGameStatus, ResetGame, difficul
 
     Menu: [
       <h1 key="title" className="GameStatusComponent" id='ResultText'>MineSweeper</h1>,
-      <h1 key="levelText" id='LevelText' ref={levelHeader}>Level 1{difficultyLevel}</h1>,
+      <h1 key="levelText" id='LevelText' ref={levelHeader}>Difficulty {levelType[difficultyLevel]}</h1>,
       <div key="GameButtons"  className="GameStatusComponent" id='GameButtonsLevelPicker'>
-         <div className='GameMenuButton' onClick={() => {ArrowPressed({add: 1})}}>{"<"}</div>
-         <div className='GameMenuButton' onClick={() => {ArrowPressed({add: -1})}}>{">"}</div>
+         <div className='GameMenuButton' onClick={() => {ArrowPressed({add: -1})}}>{"<"}</div>
+         <div className='GameMenuButton' onClick={() => {ArrowPressed({add: 1})}}>{">"}</div>
       </div>,
       <div key="StartButton" className='GameMenuButton' id='StartButton'>Start</div>
     ]
@@ -36,8 +42,12 @@ export default function GameMenu({gameStatus, setGameStatus, ResetGame, difficul
 
   const ArrowPressed = ({add}) => {
     ChangeDifficulty({add: add})
-    levelHeader.current.textContent = `Level ${difficultyLevel}`; // Change to a number and add or find a different way
   }
+
+  useEffect(() => {
+    if (!levelHeader.current) {return}
+    levelHeader.current.textContent = `Difficulty ${levelType[difficultyLevel]}`;
+  }, [difficultyLevel, levelType])
 
 
   useEffect(() => {

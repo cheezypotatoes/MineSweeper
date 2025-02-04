@@ -1,5 +1,5 @@
 import './assets/css/App.css'
-import { useState, useRef, useCallback, useEffect } from 'react'
+import { useState, useRef, useCallback } from 'react'
 import { eventBus } from './GameScripts/EventBus/EventBus'
 import GameBoard from './components/GameBoard'
 import GameMenu from './components/GameMenu'
@@ -25,14 +25,18 @@ function App() {
     eventBus.emit("GenerateBombs", {amount: BombCount.current});
   }, [])
 
-  useEffect(() => {
-    console.log(difficultyLevel)
-  }, [difficultyLevel])
-
   const ChangeDifficulty = ({add}) => {
-    setDifficultyLevel(prevCount => prevCount + add);
-  }
-    
+    setDifficultyLevel(prev => {
+        const newLevel = prev + add;
+        if (newLevel > 3 || newLevel < 1) {
+            return prev;
+        }
+        return newLevel;
+    });
+};
+
+  
+  
 
   return (
     <div id="MainContainer">
