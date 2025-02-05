@@ -1,13 +1,13 @@
 import './assets/css/App.css'
-import { useState, useRef, useCallback } from 'react'
+import { useState, useRef, useCallback, useEffect, useMemo } from 'react'
 import { eventBus } from './GameScripts/EventBus/EventBus'
 import GameBoard from './components/GameBoard'
 import GameMenu from './components/GameMenu'
 
 function App() {
-  const [gameStatus, setGameStatus] = useState("Playing");
+  const [gameStatus, setGameStatus] = useState("Menu");
   const [tiles, setTiles] = useState([]);
-  const [tilesSize,] = useState([10, 10]); // Direct change size when pressing causes crash
+  const [tilesSize, setTilesSize] = useState([10, 10]); // Direct change size when pressing causes crash
   // TODO: Uses array to force trigger a re-rendering, make it so that it not need an array
   const [dugTileSet, setDugTileSet] = useState(new Set())
   const [dugTilesEvent, setDugTilesEvent] = useState([]);
@@ -15,6 +15,11 @@ function App() {
   const [flaggedTileSet, setFlaggedTileSet] = useState(new Set());
   const [difficultyLevel, setDifficultyLevel] = useState(1);
   const BombCount = useRef(10); // TODO: TESTING PURPOSES
+  const DifficultyMap = useMemo(() => ({
+    1: [[9, 9], 10],
+    2: [[16, 16], 40],
+    3: [[20, 20], 80]
+  }), []);
 
   const ResetGame = useCallback(() => {
     eventBus.emit("ResetEntireData")
@@ -33,7 +38,14 @@ function App() {
         }
         return newLevel;
     });
-};
+  };
+
+  useEffect(() => {
+    const difficultyData = DifficultyMap[difficultyLevel];
+    setTilesSize(difficultyData[0])
+    BombCount.current = difficultyData[1];
+
+  }, [difficultyLevel, DifficultyMap])
 
   
   
