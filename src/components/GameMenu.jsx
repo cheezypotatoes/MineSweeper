@@ -11,7 +11,7 @@ export default function GameMenu({gameStatus, setGameStatus, ResetGame, difficul
     []
   )
 
-
+  // TODO: OPTIMIZE
   const [gameStatusMap,] = useState({
     Lost: [
       <h1 key="title" className="GameStatusComponent" id='ResultText'>You Lost</h1>,
