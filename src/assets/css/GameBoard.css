@@ -5,14 +5,9 @@
     display: grid;
 }
 
-@media (max-width: 320px) {
-    #GameBoard {
-        height: 20vh;
-        width: 90vw;
-    }
-}
 
-@media (min-width: 320px) {
+
+@media (min-width: 0px) {
     #GameBoard {
         height: 20vh;
         width: 90vw;
