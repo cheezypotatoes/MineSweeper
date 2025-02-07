@@ -34,3 +34,10 @@ html, body {
         grid-template-rows: 25vh 1fr;
     }
 }
+
+@media (min-width: 1300px) {
+    #MainContainer {
+        grid-template-columns: 80vw 20vw;
+        grid-template-rows: 1fr;
+    }
+}

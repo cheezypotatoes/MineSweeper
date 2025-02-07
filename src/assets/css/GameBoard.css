@@ -27,3 +27,24 @@
         width: 65vw;
     }
 }
+
+@media (min-width: 780px) {
+    #GameBoard {
+        height: 20vh;
+        width: 60vw;
+    }
+}
+
+@media (min-width: 1000px) {
+    #GameBoard {
+        height: 20vh;
+        width: 45vw;
+    }
+}
+
+@media (min-width: 1300px) {
+    #GameBoard {
+        height: 50vh;
+        width: 70vw;
+    }
+}
