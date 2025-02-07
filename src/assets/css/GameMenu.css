@@ -126,11 +126,41 @@
         left: 50%;
         transform: translate(-50%, -50%);
     }
-
-    
 }
 
-@media (min-width: 620px) {
+@media (min-width: 590px) {
+    #GameMenuBackground {
+        height: 15vh;
+        width: 60vw;
+    }
+
+    #ResultText {
+        top: 25%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    #LevelText {
+        top: 35%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    #GameButtonsLevelPicker {
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    #StartButton {
+        top: 85%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+
+@media (min-width: 610px) {
     #GameMenuBackground {
         height: 20vh;
         width: 65vw;
