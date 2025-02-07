@@ -9,7 +9,14 @@
 
 @media (min-width: 0px) {
     #GameBoard {
-        height: 20vh;
+        height: 15vh;
         width: 90vw;
+    }
+}
+
+@media (min-width: 620px) {
+    #GameBoard {
+        height: 20vh;
+        width: 65vw;
     }
 }
