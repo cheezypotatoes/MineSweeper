@@ -25,3 +25,17 @@ html, body {
     width: 100%;
     background-color: rebeccapurple;
 }
+
+@media (max-width: 320px) {
+    #MainContainer {
+        grid-template-columns: 1fr;
+        grid-template-rows: 25vh 1fr;
+    }
+}
+
+@media (min-width: 320px) {
+    #MainContainer {
+        grid-template-columns: 1fr;
+        grid-template-rows: 25vh 1fr;
+    }
+}

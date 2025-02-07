@@ -5,62 +5,16 @@
     display: grid;
 }
 
+@media (max-width: 320px) {
+    #GameBoard {
+        height: 20vh;
+        width: 90vw;
+    }
+}
+
 @media (min-width: 320px) {
     #GameBoard {
-        height: 15vh;
-        width: 70vw;
-        outline: 0.5vw solid rgb(102, 102, 102);
-        display: grid;
+        height: 20vh;
+        width: 90vw;
     }
 }
-
-@media (min-width: 768px) {
-    #GameBoard {
-        height: 25vh;
-        width: 70vw;
-        outline: 0.5vw solid rgb(102, 102, 102);
-        display: grid;
-    }
-}
-
-@media (min-width: 1024px) {
-    #GameBoard {
-        height: 75vh;
-        width: 45vw;
-        outline: 0.5vw solid rgb(102, 102, 102);
-        display: grid;
-    }
-}
-
-
-@media (min-width: 1440px) {
-    #GameBoard {
-        height: 30vh;
-        width: 40vw;
-        outline: 0.5vw solid rgb(102, 102, 102);
-        display: grid;
-    }
-}
-
-@media (min-width: 2560px)  {
-    #GameBoard {
-        height: 55vh;
-        width: 50vw;
-        outline: 0.5vw solid rgb(102, 102, 102);
-        display: grid;
-    }
-}
-
-@media (max-width: 2560px)  {
-    #GameBoard {
-        height: 55vh;
-        width: 30vw;
-        outline: 0.5vw solid rgb(102, 102, 102);
-        display: grid;
-    }
-}
-
-
-
-
-
