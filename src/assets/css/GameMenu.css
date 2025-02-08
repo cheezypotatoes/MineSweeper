@@ -95,197 +95,260 @@
     border-bottom: 0.6vw solid rgb(92, 92, 92);
 }
 
-
-
-@media (min-width: 0px) {
+@media (max-width: 960px) {
+    
+    #GameBoard,
     #GameMenuBackground {
-        height: 15vh;
-        width: 90vw;
-    }
-
-    #ResultText {
-        top: 35%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    #LevelText {
-        top: 45%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    #GameButtonsLevelPicker {
-        top: 55%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    #StartButton {
-        top: 85%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        height: 75vh;
+        width: 50vw;
     }
 }
 
-@media (min-width: 590px) {
+@media (max-width: 800px) {
+    
+    #GameBoard,
     #GameMenuBackground {
-        height: 15vh;
+        height: 75vh;
         width: 60vw;
     }
 
     #ResultText {
-        top: 25%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        top: 15%;
+        font-size: 5vw;
     }
 
     #LevelText {
-        top: 35%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    #GameButtonsLevelPicker {
-        top: 40%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    #StartButton {
-        top: 85%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-}
-
-
-@media (min-width: 610px) {
-    #GameMenuBackground {
-        height: 20vh;
-        width: 65vw;
-    }
-
-    #GameButtonsLevelPicker {
-        top: 45%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    #StartButton {
-        top: 80%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    #LevelText {
-        top: 35%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    #ResultText {
-        top: 25%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        font-size: 3vw;
+        top: 15%;
     }
     
-}
-
-@media (min-width: 780px) {
-    #GameMenuBackground {
-        height: 20vh;
-        width: 60vw;
-    }
-
-    #ResultText {
-        top: 25%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    #LevelText {
-        top: 35%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
     #GameButtonsLevelPicker {
-        top: 40%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    #StartButton {
-        top: 80%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-    
-}
-
-@media (min-width: 1000px) {
-    #GameMenuBackground {
-        height: 20vh;
-        width: 45vw;
-    }
-
-    #ResultText {
-        top: 20%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    #LevelText {
-        top: 25%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    #GameButtonsLevelPicker {
+        height: 25vh;
+        width: 50vw;
         top: 30%;
         left: 50%;
-        transform: translate(-50%, -50%);
+    }
+    
+    #StartButton {
+        top: 85%;
+        left: 50%;
+    }
+    
+}
+
+@media (max-width: 700px) {
+    
+    #GameBoard,
+    #GameMenuBackground {
+        height: 75vh;
+        width: 60vw;
     }
 
+    #ResultText {
+        top: 25%;
+        font-size: 5vw;
+    }
+
+    #LevelText {
+        font-size: 3vw;
+        top: 25%;
+    }
+    
+    #GameButtonsLevelPicker {
+        height: 25vh;
+        width: 50vw;
+        top: 35%;
+        left: 50%;
+    }
+    
     #StartButton {
         top: 80%;
         left: 50%;
-        transform: translate(-50%, -50%);
     }
+    
 }
 
-/* TODO: FIX FONT SIZE */
-@media (min-width: 1300px) {
+
+@media (max-width: 700px) {
+    
+    #GameBoard,
+    #GameMenuBackground {
+        height: 60vh;
+        width: 70vw;
+    }
+
+    #ResultText {
+        top: 25%;
+        font-size: 5vw;
+    }
+
+    #LevelText {
+        font-size: 3vw;
+        top: 25%;
+    }
+    
+    #GameButtonsLevelPicker {
+        height: 25vh;
+        width: 50vw;
+        top: 35%;
+        left: 50%;
+    }
+    
+    #StartButton {
+        top: 80%;
+        left: 50%;
+    }
+    
+}
+
+@media (max-width: 430px) {
+    
+    #GameBoard,
     #GameMenuBackground {
         height: 50vh;
         width: 70vw;
     }
 
     #ResultText {
-        top: 35%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        top: 25%;
+        font-size: 5vw;
     }
 
     #LevelText {
-        top: 45%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        font-size: 3vw;
+        top: 30%;
     }
-
+    
     #GameButtonsLevelPicker {
-        top: 55%;
+        height: 25vh;
+        width: 50vw;
+        top: 40%;
         left: 50%;
-        transform: translate(-50%, -50%);
+    }
+    
+    #StartButton {
+        top: 80%;
+        left: 50%;
+    }
+    
+}
+
+@media (max-width: 350px) {
+    
+    #GameBoard,
+    #GameMenuBackground {
+        height: 40vh;
+        width: 60vw;
     }
 
+    #ResultText {
+        top: 25%;
+        font-size: 5vw;
+    }
+
+    #LevelText {
+        font-size: 3vw;
+        top: 30%;
+    }
+    
+    #GameButtonsLevelPicker {
+        height: 25vh;
+        width: 50vw;
+        top: 40%;
+        left: 50%;
+    }
+    
+    #StartButton {
+        top: 80%;
+        left: 50%;
+    }
+    
+}
+
+
+@media (max-width: 250px) {
+
+    #MainContainer {
+        grid-template-columns: 1fr;
+        grid-template-rows: 50vh 100vh;
+    }
+    
+    #GameBoard,
+    #GameMenuBackground {
+        height: 30vh;
+        width: 70vw;
+    }
+
+    #ResultText {
+        top: 25%;
+        font-size: 5vw;
+    }
+
+    #LevelText {
+        font-size: 3vw;
+        top: 30%;
+    }
+    
+    #GameButtonsLevelPicker {
+        height: 25vh;
+        width: 50vw;
+        top: 40%;
+        left: 50%;
+    }
+    
+    #StartButton {
+        top: 80%;
+        left: 50%;
+    }
+    
+}
+
+@media (max-width: 180px) {
+
+    #MainContainer {
+        grid-template-columns: 1fr;
+        grid-template-rows: 50vh 100vh;
+    }
+    
+    #GameBoard,
+    #GameMenuBackground {
+        height: 30vh;
+        width: 90vw;
+    }
+
+    #ResultText {
+        top: 30%;
+        font-size: 9vw;
+    }
+
+    #LevelText {
+        font-size: 4vw;
+        top: 35%;
+    }
+    
+    #GameButtonsLevelPicker {
+        height: 25vh;
+        width: 50vw;
+        top: 40%;
+        left: 50%;
+    }
+    
     #StartButton {
         top: 85%;
         left: 50%;
-        transform: translate(-50%, -50%);
     }
+    
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
