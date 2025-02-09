@@ -1,8 +1,10 @@
-# React + Vite
+#  💣 Simple Minesweeper
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is just a simple Minesweeper project I made out of boredom. It does lack some small issues, but I got tired of finishing it.
 
-Currently, two official plugins are available:
+## 🚀How to use
+- **Right-click to flag tiles.
+- **Click to uncover tiles.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Sample
+![Screenshot](src/assets/img/example.png)

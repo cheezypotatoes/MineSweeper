@@ -30,6 +30,7 @@ function App() {
     setFlaggedTileEvent([]);
     setFlaggedTileSet(new Set());
     eventBus.emit("GenerateBombs", {amount: BombCount.current});
+    setEvents([]);
   }, [])
 
   const ChangeDifficulty = ({add}) => {

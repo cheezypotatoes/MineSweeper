@@ -14,6 +14,7 @@ const EventContainerGrid = ({ events }) => {
         }
 
         setEvents(events)
+        
     },[setEvents, events])
 
 

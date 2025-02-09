@@ -11,18 +11,9 @@ function GameBoard(
     setFlaggedTileEvent, flaggedTileSet, setFlaggedTileSet, updateEventVisual}) {
     const GameBoard = useRef(null);
 
-    // TODO: Starting menu
-    // TODO: Level change system
-    // TODO: MENU
-    // TODO: Huge bomb?
-    // TODO: Get rid of anything around it if specific all adjacent number are flagged around
-    
-    
     const PreventDefault = (e) => {
         e.preventDefault();
     };
-
-
 
     // Change dug tiles event if the event changes
     useEffect(() => {
