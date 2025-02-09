@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import { useEffect, useState, useRef, useMemo  } from 'react';
+import PropTypes from 'prop-types';
 import '../assets/css/GameMenu.css'
 
 export default function GameMenu({gameStatus, setGameStatus, ResetGame, difficultyLevel, ChangeDifficulty}) {
@@ -79,3 +79,11 @@ export default function GameMenu({gameStatus, setGameStatus, ResetGame, difficul
     </div>
   );
 }
+
+GameMenu.propTypes = {
+  gameStatus: PropTypes.string.isRequired,
+  setGameStatus: PropTypes.func.isRequired,
+  ResetGame: PropTypes.func.isRequired,
+  difficultyLevel: PropTypes.number.isRequired,
+  ChangeDifficulty: PropTypes.func.isRequired,
+};

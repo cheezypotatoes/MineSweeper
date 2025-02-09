@@ -1,7 +1,6 @@
- /* eslint-disable react/prop-types */
 import "../assets/css/Tile.css"
 import { useEffect, useRef } from "react"
-
+import PropTypes from "prop-types";
 import { eventBus } from "../GameScripts/EventBus/EventBus"
 
 
@@ -58,5 +57,15 @@ function Tile( { index, isFlag, uncovered, UpdateUncoveredEvents, UpdateFlagEven
         </div>
     )
 }
+
+Tile.propTypes = {
+    index: PropTypes.number.isRequired,
+    isFlag: PropTypes.bool.isRequired,
+    uncovered: PropTypes.bool.isRequired,
+    UpdateUncoveredEvents: PropTypes.func.isRequired,
+    UpdateFlagEvents: PropTypes.func.isRequired,
+    updateEventVisual: PropTypes.func.isRequired,
+};
+
 
 export default Tile;
