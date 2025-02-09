@@ -46,13 +46,14 @@ class MineSweeperGame {
         this.bombIndexes.add(newBombIndex);
     }
 
-    TilePressed({ index }) {
+    TilePressed({ index, automaticUncovered }) {
         if (this.BombUncovered) {return;}
         this.tileUncoveredAmount++;
         const id = `id_${Date.now()}_${Math.random().toString(36).substring(2, 10)}`
         let Event = {
             id: id,
             type: "UncoveredTile",
+            automaticUncovered: automaticUncovered === undefined? false : true,
             index: index,
             timeStamp: new Date().toISOString().replace('T', ' ').slice(0, 19),
             isBomb: this.bombIndexes.has(index) ? true: false,
@@ -84,8 +85,10 @@ class MineSweeperGame {
     CreateFlagEvent({ index }) { 
         const Event = {
             type: "FlaggedTile",
+            id: `id_${Date.now()}_${Math.random().toString(36).substring(2, 10)}`,
             index: index,
             isFlagged: true,
+            timeStamp: new Date().toISOString().replace('T', ' ').slice(0, 19),
         };
         eventBus.emit("SendTileUncoveredEventToEventStore", { Event: Event });
     }
@@ -108,7 +111,7 @@ class MineSweeperGame {
             if (this.bombIndexes.has(currentPop)) {
                 continue;
             }
-            this.TilePressed({index: currentPop});
+            this.TilePressed({index: currentPop, automaticUncovered: true});
         }    
     }
 

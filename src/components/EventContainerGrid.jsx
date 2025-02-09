@@ -1,6 +1,5 @@
-/* eslint-disable react/prop-types */
-
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import EventInstance from "./EventInstance";
 import "../assets/css/EventContainerGrid.css"
 
@@ -15,23 +14,38 @@ const EventContainerGrid = ({ events }) => {
         }
 
         setEvents(events)
+        console.log(events)
     },[setEvents, events])
 
 
     return (
         <div id='EventContainerGrid'> 
-            {event.map((evt, index) => (
+            {event.slice().reverse().map((evt, index) => (
                 <EventInstance 
                     key={index}
                     id={evt.id}
-                    index={index}
+                    index={evt.index}
                     isBomb={evt.isBomb}
                     timeStamp={evt.timeStamp}
                     type={evt.type}
+                    automatic={evt.automaticUncovered}
                 />
             ))}
         </div>
     );
+};
+
+EventContainerGrid.propTypes = {
+    events: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            index: PropTypes.number.isRequired,
+            isBomb: PropTypes.bool.isRequired,
+            timeStamp: PropTypes.string.isRequired,
+            type: PropTypes.string.isRequired,
+            automaticUncovered: PropTypes.bool.isRequired,
+        })
+    ).isRequired,
 };
 
 export default EventContainerGrid;
