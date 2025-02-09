@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react"
 import { eventBus } from "../GameScripts/EventBus/EventBus"
 
 
-function Tile( { index, isFlag, uncovered, UpdateUncoveredEvents, UpdateFlagEvents} ) {
+function Tile( { index, isFlag, uncovered, UpdateUncoveredEvents, UpdateFlagEvents, updateEventVisual} ) {
     const Index = useRef(index);
     const TileStatus = useRef();
 
@@ -19,8 +19,8 @@ function Tile( { index, isFlag, uncovered, UpdateUncoveredEvents, UpdateFlagEven
             e.preventDefault();
             eventBus.emit("CreateFlagEvent", {index: Index.current});
             UpdateFlagEvents();
-           
         }
+        updateEventVisual();
     }
 
     //TODO: OPTIMIZED THIS FUNCTION

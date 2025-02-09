@@ -1,0 +1,12 @@
+#EventContainerGrid {
+    height: 90vh; /* Adjust as needed */
+    width: 100%;
+    overflow-y: auto; /* Enables scrolling when content overflows */
+    overflow-x: hidden;
+    background-color: green;
+}
+
+.TEST {
+    font-size: 3vw;
+}
+

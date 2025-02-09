@@ -3,6 +3,7 @@ import { useState, useRef, useCallback, useEffect, useMemo } from 'react'
 import { eventBus } from './GameScripts/EventBus/EventBus'
 import GameBoard from './components/GameBoard'
 import GameMenu from './components/GameMenu'
+import EventContainerGrid from './components/EventContainerGrid'
 
 function App() {
   const [gameStatus, setGameStatus] = useState("Menu");
@@ -20,6 +21,7 @@ function App() {
     2: [[16, 16], 40],
     3: [[20, 20], 80]
   }), []);
+  const [events, setEvents] = useState();
 
   const ResetGame = useCallback(() => {
     eventBus.emit("ResetEntireData")
@@ -48,6 +50,14 @@ function App() {
   }, [difficultyLevel, DifficultyMap])
 
   
+
+  const updateEventVisual = useCallback(() => {
+    const data = eventBus.emit("GetEventStoreEvents");
+    setEvents(data);
+    console.log("DATA:", data)
+  }, []);
+
+  
   
 
   return (
@@ -57,14 +67,15 @@ function App() {
            setGameStatus={setGameStatus} tiles={tiles} dugTileSet={dugTileSet} setDugTileSet={setDugTileSet}
            setTiles={setTiles} tilesSize={tilesSize}  dugTilesEvent={dugTilesEvent} setDugTilesEvent={setDugTilesEvent}
            flaggedTileEvent={flaggedTileEvent} setFlaggedTileEvent={setFlaggedTileEvent} flaggedTileSet={flaggedTileSet} 
-           setFlaggedTileSet={setFlaggedTileSet} BombCount={BombCount}/>
+           setFlaggedTileSet={setFlaggedTileSet} BombCount={BombCount} updateEventVisual={updateEventVisual}/>
 
           <GameMenu gameStatus={gameStatus} setGameStatus={setGameStatus} ResetGame={ResetGame}
           difficultyLevel={difficultyLevel} ChangeDifficulty={ChangeDifficulty}/>
         </div>
 
         <div id='EventContainer'>
-
+          <h1 id='EventContainerText'>Events</h1>
+          <EventContainerGrid events={events}/>
         </div>
     </div> 
   )

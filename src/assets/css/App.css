@@ -23,8 +23,17 @@ html, body {
 #EventContainer {
     height: 100%;
     width: 100%;
-    background-color: rebeccapurple;
+    background-color: rgb(231, 231, 231);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 
-
-
+#EventContainerText {
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    height: 4vh;
+    width: auto;
+    font-size: 2vw;
+}

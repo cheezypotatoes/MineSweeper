@@ -8,7 +8,7 @@ import { eventBus } from "../GameScripts/EventBus/EventBus"
 function GameBoard(
     { BombCount, setGameStatus, tiles, setTiles, tilesSize, dugTileSet, 
     setDugTileSet, dugTilesEvent, setDugTilesEvent, flaggedTileEvent,
-    setFlaggedTileEvent, flaggedTileSet, setFlaggedTileSet}) {
+    setFlaggedTileEvent, flaggedTileSet, setFlaggedTileSet, updateEventVisual}) {
     const GameBoard = useRef(null);
 
     // TODO: Starting menu
@@ -86,13 +86,13 @@ function GameBoard(
             let isDug = dugTileSet.has(i)? true : false
             let isFlagged = flaggedTileSet.has(i)? true : false
             
-            tiles.push(<Tile key={i} index={i} isFlag={isFlagged} uncovered={isDug} UpdateUncoveredEvents={UpdateUncoveredEvents} UpdateFlagEvents={UpdateFlagEvents}/>);
+            tiles.push(<Tile key={i} updateEventVisual={updateEventVisual} index={i} isFlag={isFlagged} uncovered={isDug} UpdateUncoveredEvents={UpdateUncoveredEvents} UpdateFlagEvents={UpdateFlagEvents}/>);
         }
 
         setTiles(tiles)
     }, [dugTileSet, tilesSize, flaggedTileSet, 
         setGameStatus, setDugTileSet, setDugTilesEvent, 
-        setFlaggedTileEvent, setTiles]);
+        setFlaggedTileEvent, setTiles, updateEventVisual]);
 
     useEffect(() => {
         eventBus.emit("GenerateBombs", {amount: BombCount.current})

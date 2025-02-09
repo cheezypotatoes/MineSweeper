@@ -26,7 +26,9 @@ BootStrapList.set("returnGameStatus", returnGameStatus);
 
 // EventStore Functions
 const SendTileUncoveredEventToEventStore = ({ Event }) => {EventStore.addLatestEventToProjectionManager({Event: Event});};
+const GetEventStoreEvents = () => {return EventStore.getEvents();}
 BootStrapList.set("SendTileUncoveredEventToEventStore", SendTileUncoveredEventToEventStore);
+BootStrapList.set("GetEventStoreEvents", GetEventStoreEvents);
 
 
 // ProjectionManager Functions
